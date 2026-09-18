@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/Delivery_Service/Docker/mysql/delivery_init.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Order_Service/Docker/mysql/order_init.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Payment_Service/Docker/mysql/payment_init.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Restaurant_Service/Docker/mysql/restaurant_init.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/Restaurant_Service/src/main/java/com/Restaurant_Management/System/repo/SearchHistoryRepo.java" dialect="GenericSQL" />
+  </component>
+</project>

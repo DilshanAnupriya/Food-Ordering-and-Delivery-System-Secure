@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  
+}
+/* Add this to your global CSS file */
+
+/* Section container styling for consistent spacing between components */
+.section-container {
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle section dividers */
+.section-container::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 165, 0, 0.3), transparent);
+}
+
+/* Last section should not have a divider */
+.section-container:last-of-type::after {
+  display: none;
+}
+
+/* Enhancement for card elements to match the theme */
+.themed-card {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 165, 0, 0.2);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.themed-card:hover {
+  border-color: rgba(255, 165, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(255, 165, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+/* Button styling to match the theme */
+.themed-button {
+  background: linear-gradient(to right, #ff6b6b, #ff8e53);
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.themed-button:hover {
+  background: linear-gradient(to right, #ff5252, #ff7043);
+  box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Custom scrollbar to match theme */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #ff6b6b, #ff8e53);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #ff5252, #ff7043);
+}
