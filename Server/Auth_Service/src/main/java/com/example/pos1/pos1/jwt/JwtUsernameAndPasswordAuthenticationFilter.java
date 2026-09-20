@@ -74,17 +74,13 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
             try {
                 return authenticationManager.authenticate(authentication);
             } catch (BadCredentialsException e) {
-                // Count the failed attempt (and lock the account when the
-                // threshold is reached) before propagating the failure.
+                // Count the failed attempt. The account is locked once the
+                // threshold (MAX_FAILED_ATTEMPTS = 5) is reached, but the block
+                // is ENFORCED from the next attempt onward via the isLocked()
+                // pre-check above. This means the user gets a full 5 invalid
+                // attempts (reported as invalid credentials, with a countdown),
+                // and the 6th attempt is the first one to be blocked.
                 loginAttemptService.loginFailed(username);
-                if (loginAttemptService.isLocked(username)) {
-                    // This attempt was the one that tripped the lock: report it
-                    // as a lockout so the user sees the cooling-off time.
-                    request.setAttribute("minutesRemaining", loginAttemptService.getMinutesUntilUnlock(username));
-                    throw new LockedException(
-                            "Account is locked due to multiple failed login attempts. Please try again later.");
-                }
-                // Still allowed to retry: tell the user how many attempts remain.
                 request.setAttribute("attemptsRemaining", loginAttemptService.getRemainingAttempts(username));
                 throw e;
             }
@@ -171,9 +167,12 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
             long mins = (minutesRemaining instanceof Long) ? (Long) minutesRemaining : 0L;
             message = "Account locked due to too many failed login attempts. Try again in "
                     + mins + " minute(s).";
-        } else if (attemptsRemaining instanceof Integer) {
+        } else if (attemptsRemaining instanceof Integer && (Integer) attemptsRemaining > 0) {
             message = "Invalid username or password. " + attemptsRemaining
                     + " attempt(s) remaining before your account is locked.";
+        } else if (attemptsRemaining instanceof Integer) {
+            // 0 remaining: this was the 5th (final) invalid attempt.
+            message = "Invalid username or password. Your account is now locked due to too many failed attempts.";
         } else {
             message = (failed.getMessage() == null) ? "Authentication failed" : failed.getMessage();
         }

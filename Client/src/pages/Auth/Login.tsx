@@ -96,7 +96,7 @@ const Login = () => {
             if (err?.status === 423 || err?.minutesRemaining != null) {
                 const mins = err?.minutesRemaining ?? '';
                 toast.error(`🔒 Account locked. Try again in ${mins} minute(s).`, { autoClose: 6000 });
-            } else if (err?.attemptsRemaining != null) {
+            } else if (err?.attemptsRemaining != null && err.attemptsRemaining > 0) {
                 toast.warn(`Invalid credentials — ${err.attemptsRemaining} attempt(s) remaining before your account is locked.`);
             } else {
                 toast.error(err?.message || 'Login failed. Please try again.');
