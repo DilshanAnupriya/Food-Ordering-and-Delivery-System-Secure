@@ -29,27 +29,18 @@ const API_URL = 'http://localhost:8082/';
 class AuthService {
     async login(credentials: LoginCredentials): Promise<AuthResponse> {
         try {
-            // Make API request using Axios - trying multiple possible endpoints
-            let response;
-            try {
-                // First attempt: API_URL/auth/login (common pattern)
-                response = await axios.post(`${API_URL}login`, credentials, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': '*/*',
-                        'Access-Control-Expose-Headers': 'Authorization'
-                    }
-                });
-            } catch (err) {
-                // Second attempt: directly at /login (as in original code)
-                response = await axios.post(`http://localhost:8082/login`, credentials, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': '*/*',
-                        'Access-Control-Expose-Headers': 'Authorization'
-                    }
-                });
-            }
+            // Make a SINGLE API request to the login endpoint.
+            // (Previously this tried the URL, then retried the *same* URL in a
+            // catch block, sending two requests per click. That double-counted
+            // failed logins against the lockout counter, so the "attempts
+            // remaining" dropped by two each time. One request fixes it.)
+            const response = await axios.post(`${API_URL}login`, credentials, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*',
+                    'Access-Control-Expose-Headers': 'Authorization'
+                }
+            });
 
             // Check if token is in the response header (common JWT pattern)
             let token = response.headers['authorization'];
