@@ -8,6 +8,12 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
+/**
+ * Fix V3 (Security Misconfiguration): adds HTTP security-response headers to
+ * every response routed through the gateway. Previously the gateway defined
+ * only CORS configuration and set no security headers, so OWASP ZAP flagged
+ * missing X-Content-Type-Options, X-Frame-Options and Content-Security-Policy.
+ */
 @Component
 @Order(-1) // run before routing so the headers are on every response
 public class SecurityHeadersFilter implements WebFilter {
