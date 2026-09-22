@@ -22,6 +22,8 @@ import reactor.core.publisher.Mono;
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Fix for V-AuthWeakness Test 1 (Gateway authenticates nothing).
@@ -92,16 +94,40 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter, Ordered {
                     .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(token);
-            // Token is valid. Forward the authenticated username downstream so
-            // services can use it without re-parsing (optional, non-breaking).
-            String username = claims.getBody().getSubject();
+            // Token is valid. Forward the authenticated identity downstream so
+            // services can enforce object-level authorization (V-BrokenAccess /
+            // IDOR fix) without re-parsing the token. These headers are set from
+            // the validated JWT and OVERWRITE any client-supplied values, so a
+            // caller cannot spoof their identity or roles.
+            Claims body = claims.getBody();
+            String username = body.getSubject();
+            String userId = body.get("userId", String.class);
+            String roles = extractRoles(body);
             ServerWebExchange mutated = exchange.mutate()
-                    .request(r -> r.headers(h -> h.set("X-Auth-Username", username == null ? "" : username)))
+                    .request(r -> r.headers(h -> {
+                        h.set("X-Auth-Username", username == null ? "" : username);
+                        h.set("X-Auth-User-Id", userId == null ? "" : userId);
+                        h.set("X-Auth-Roles", roles);
+                    }))
                     .build();
             return chain.filter(mutated);
         } catch (Exception e) {
             return unauthorized(exchange, "Authentication failed: invalid or expired token");
         }
+    }
+
+    /** Flatten the JWT "authorities" claim into a comma-separated roles string. */
+    @SuppressWarnings("unchecked")
+    private String extractRoles(Claims body) {
+        Object authorities = body.get("authorities");
+        if (authorities instanceof List) {
+            return ((List<Object>) authorities).stream()
+                    .filter(o -> o instanceof Map)
+                    .map(o -> String.valueOf(((Map<String, Object>) o).get("authority")))
+                    .filter(s -> s != null && !s.isEmpty() && !"null".equals(s))
+                    .collect(Collectors.joining(","));
+        }
+        return "";
     }
 
     private boolean isPublic(String path, HttpMethod method) {

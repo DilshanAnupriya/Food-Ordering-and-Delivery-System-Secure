@@ -1,5 +1,6 @@
 package com.OrderManagement.OrderManagement.controller;
 
+import com.OrderManagement.OrderManagement.exception.OrderException;
 import com.OrderManagement.OrderManagement.model.OrderModel;
 import com.OrderManagement.OrderManagement.model.OrderStatus;
 import com.OrderManagement.OrderManagement.service.OrderService;
@@ -73,17 +74,24 @@ public class OrderController {
     // Update order
     @PutMapping("/{orderId}")
     public ResponseEntity<OrderModel> updateOrder(@PathVariable Long orderId,
-                                                  @Valid @RequestBody OrderModel order) {
+                                                  @Valid @RequestBody OrderModel order,
+                                                  @RequestHeader(value = "X-Auth-User-Id", required = false) String callerUserId,
+                                                  @RequestHeader(value = "X-Auth-Roles", required = false) String callerRoles) {
+        assertCanModify(orderId, callerUserId, callerRoles);
         return ResponseEntity.ok(orderService.updateOrder(orderId, order));
     }
 
     // Update order status
     @PatchMapping("/{orderId}/status")
     public ResponseEntity<OrderModel> updateOrderStatus(@PathVariable Long orderId,
-                                                        @RequestBody Map<String, String> statusRequest) {
+                                                        @RequestBody Map<String, String> statusRequest,
+                                                        @RequestHeader(value = "X-Auth-User-Id", required = false) String callerUserId,
+                                                        @RequestHeader(value = "X-Auth-Roles", required = false) String callerRoles) {
         if (!statusRequest.containsKey("status")) {
             return ResponseEntity.badRequest().build();
         }
+
+        assertCanModify(orderId, callerUserId, callerRoles);
 
         try {
             OrderStatus status = OrderStatus.valueOf(statusRequest.get("status").toUpperCase());
@@ -105,8 +113,40 @@ public class OrderController {
 
     // Delete order
     @DeleteMapping("/{orderId}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
+    public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId,
+                                            @RequestHeader(value = "X-Auth-User-Id", required = false) String callerUserId,
+                                            @RequestHeader(value = "X-Auth-Roles", required = false) String callerRoles) {
+        assertCanModify(orderId, callerUserId, callerRoles);
         orderService.deleteOrder(orderId);
         return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Object-level authorization guard for order modifications
+     * (fix for V-BrokenAccess/IDOR Test 2).
+     *
+     * The caller identity (userId) and roles are taken from headers that the API
+     * Gateway derives from the validated JWT - never from the request body or a
+     * path variable, and the gateway overwrites any client-supplied values.
+     *
+     * A modification is permitted only when the caller either owns the order or
+     * holds a privileged role (admin / restaurant owner / delivery person).
+     * A regular customer attempting to modify someone else's order gets 403.
+     */
+    private void assertCanModify(Long orderId, String callerUserId, String callerRoles) {
+        OrderModel order = orderService.getOrderById(orderId); // 404 if it does not exist
+
+        boolean privileged = callerRoles != null && (
+                callerRoles.contains("ROLE_ADMIN")
+                        || callerRoles.contains("ROLE_RESTAURANT_OWNER")
+                        || callerRoles.contains("ROLE_DELIVERY_PERSON"));
+
+        boolean owner = callerUserId != null
+                && !callerUserId.isEmpty()
+                && callerUserId.equals(order.getUserId());
+
+        if (!privileged && !owner) {
+            throw new OrderException("You are not authorized to modify this order", HttpStatus.FORBIDDEN);
+        }
     }
 }
