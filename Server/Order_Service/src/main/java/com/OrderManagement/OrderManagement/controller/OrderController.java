@@ -60,8 +60,14 @@ public class OrderController {
 
     // Get order by ID
     @GetMapping("/{orderId}")
-    public ResponseEntity<OrderModel> getOrderById(@PathVariable Long orderId) {
-        return ResponseEntity.ok(orderService.getOrderById(orderId));
+    public ResponseEntity<OrderModel> getOrderById(@PathVariable Long orderId,
+                                                   @RequestHeader(value = "X-Auth-User-Id", required = false) String callerUserId,
+                                                   @RequestHeader(value = "X-Auth-Roles", required = false) String callerRoles) {
+        // Fix for V-BrokenAccess/IDOR Test 1 (read another user's order):
+        // enforce object-level authorization before returning the order.
+        OrderModel order = orderService.getOrderById(orderId);
+        assertOwnerOrPrivileged(order, callerUserId, callerRoles);
+        return ResponseEntity.ok(order);
     }
 
     // Create new order
@@ -135,7 +141,16 @@ public class OrderController {
      */
     private void assertCanModify(Long orderId, String callerUserId, String callerRoles) {
         OrderModel order = orderService.getOrderById(orderId); // 404 if it does not exist
+        assertOwnerOrPrivileged(order, callerUserId, callerRoles);
+    }
 
+    /**
+     * Core object-level authorization check, shared by read and write endpoints.
+     * A caller may access an order only if they own it (their userId matches the
+     * order's userId) or hold a privileged role (admin / restaurant owner /
+     * delivery person). Otherwise a 403 is returned.
+     */
+    private void assertOwnerOrPrivileged(OrderModel order, String callerUserId, String callerRoles) {
         boolean privileged = callerRoles != null && (
                 callerRoles.contains("ROLE_ADMIN")
                         || callerRoles.contains("ROLE_RESTAURANT_OWNER")
@@ -146,7 +161,7 @@ public class OrderController {
                 && callerUserId.equals(order.getUserId());
 
         if (!privileged && !owner) {
-            throw new OrderException("You are not authorized to modify this order", HttpStatus.FORBIDDEN);
+            throw new OrderException("You are not authorized to access this order", HttpStatus.FORBIDDEN);
         }
     }
 }
