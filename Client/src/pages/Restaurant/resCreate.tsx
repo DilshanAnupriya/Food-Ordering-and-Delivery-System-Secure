@@ -293,6 +293,7 @@ const ResCreate = () => {
                     // ORIGINAL: the notification payload omitted restaurantId entirely.
                     const savedRestaurant = await axios.get(
                         `http://localhost:8082/api/v1/restaurants/by-name/${encodeURIComponent(formData.restaurantName)}`
+                    );
                     await axios.post(
                         `http://localhost:8080/api/notifications/restaurant-confirmation`,
                         {
