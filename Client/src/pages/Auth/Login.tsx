@@ -1,5 +1,7 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { authService } from '../../services/auth/auth';
 import { useAuth } from '../../services/auth/authContext';
 import { ChevronRight, Lock, User, Coffee } from 'lucide-react';
@@ -87,9 +89,19 @@ const Login = () => {
 
             // Redirect based on user role
             redirectBasedOnRole(userRole);
-        } catch (err) {
-            // @ts-ignore
-            setError(err.message || 'Login failed. Please try again.');
+        } catch (err: any) {
+            // Show lockout feedback as toasts (V-AuthWeakness Test 4 fix):
+            // - a countdown when the account is locked,
+            // - a warning with the number of attempts left otherwise.
+            if (err?.status === 423 || err?.minutesRemaining != null) {
+                const mins = err?.minutesRemaining ?? '';
+                toast.error(`🔒 Account locked. Try again in ${mins} minute(s).`, { autoClose: 6000 });
+            } else if (err?.attemptsRemaining != null && err.attemptsRemaining > 0) {
+                toast.warn(`Invalid credentials — ${err.attemptsRemaining} attempt(s) remaining before your account is locked.`);
+            } else {
+                toast.error(err?.message || 'Login failed. Please try again.');
+            }
+            setError(err?.message || 'Login failed. Please try again.');
         } finally {
             setIsLoading(false);
         }
@@ -98,6 +110,7 @@ const Login = () => {
     // Rest of component remains the same
     return (
         <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+            <ToastContainer position="top-right" autoClose={4000} />
             <video
                 className="absolute top-0 left-0 w-full h-full object-cover z-0"
                 autoPlay

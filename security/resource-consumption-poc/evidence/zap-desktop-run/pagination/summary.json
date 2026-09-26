@@ -1,0 +1,40 @@
+{
+  "finding" : "Unbounded pagination",
+  "recordedAtUtc" : "2026-09-26T11:03:28.492753Z",
+  "springBootVersion" : "3.4.3",
+  "javaVersion" : "21.0.9",
+  "httpHost" : "127.0.0.1",
+  "httpPort" : 65018,
+  "zapProxy" : "http://127.0.0.1:8080",
+  "seededOrders" : 250,
+  "baseline" : {
+    "url" : "http://127.0.0.1:65018/api/v1/orders?page=0&size=10",
+    "requestedSize" : 10,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "4790" ],
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:03:28 GMT" ]
+    },
+    "returnedOrders" : 10,
+    "totalItems" : 250,
+    "responseBytes" : 4790,
+    "durationMs" : 234
+  },
+  "oversized" : {
+    "url" : "http://127.0.0.1:65018/api/v1/orders?page=0&size=200",
+    "requestedSize" : 200,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "94478" ],
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:03:28 GMT" ]
+    },
+    "returnedOrders" : 200,
+    "totalItems" : 250,
+    "responseBytes" : 94478,
+    "durationMs" : 49
+  },
+  "scope" : "Direct service HTTP with original controller/service/repository; H2 replaces MySQL; no gateway.",
+  "limitation" : "Demonstrates acceptance of size=200, not absence of every possible limit or a denial of service. Timing is descriptive, not a benchmark."
+}

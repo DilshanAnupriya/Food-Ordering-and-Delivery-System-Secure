@@ -1,0 +1,11 @@
+Recorded PoC execution output — 26 September 2026
+
+POC PAGINATION: size=10 -> 10 orders (4791 bytes); size=200 -> 200 orders (94460 bytes).
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.429 s -- in local.security.ResourceConsumptionPocTest
+[INFO] BUILD SUCCESS
+[INFO] Finished at: 2026-09-26T14:50:12+05:30
+
+POC NOTIFICATIONS: 6 identical POSTs in 5209 ms -> 6 HTTP 200 responses, 6 captured emails, 0 HTTP 429 responses.
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.795 s -- in local.security.ResourceConsumptionPocTest
+[INFO] BUILD SUCCESS
+[INFO] Finished at: 2026-09-26T14:50:58+05:30

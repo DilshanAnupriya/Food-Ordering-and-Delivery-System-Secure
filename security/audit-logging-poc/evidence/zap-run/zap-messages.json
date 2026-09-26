@@ -1,0 +1,107 @@
+{
+  "messages": [
+    {
+      "note": "",
+      "rtt": "126",
+      "responseBody": "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"PLACED\",\"orderDate\":\"2026-09-26T18:52:05.893751\",\"lastUpdated\":\"2026-09-26T18:52:05.893769\",\"deliveryAddress\":\"Local audit test fixture\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10,\"deliveryFee\":1,\"tax\":1,\"totalAmount\":12,\"orderItems\":[{\"id\":1,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10,\"totalPrice\":10}]}",
+      "cookieParams": "",
+      "requestBody": "{\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\n \"deliveryAddress\":\"Local audit test fixture\",\"contactPhone\":\"0000000000\",\n \"deliveryFee\":1,\"tax\":1,\n \"orderItems\":[{\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\n \"quantity\":1,\"unitPrice\":10,\"totalPrice\":10}]}\n",
+      "responseHeader": "HTTP/1.1 201\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:22:05 GMT\r\ncontent-length: 466\r\n\r\n",
+      "requestHeader": "POST http://127.0.0.1:51012/api/v1/orders HTTP/1.1\r\nContent-Length: 290\r\nhost: 127.0.0.1:51012\r\nUser-Agent: Java-http-client/21.0.9\r\nContent-Type: application/json\r\nX-Request-ID: AUDIT-POC-01-create\r\n\r\n",
+      "id": "35",
+      "type": "1",
+      "timestamp": "1790428925826",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "16",
+      "responseBody": "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"PLACED\",\"orderDate\":\"2026-09-26T18:52:05.893751\",\"lastUpdated\":\"2026-09-26T18:52:05.893769\",\"deliveryAddress\":\"Local audit test fixture\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10.00,\"deliveryFee\":1.00,\"tax\":1.00,\"totalAmount\":12.00,\"orderItems\":[{\"id\":1,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10.00,\"totalPrice\":10.00}]}",
+      "cookieParams": "",
+      "requestBody": "",
+      "responseHeader": "HTTP/1.1 200\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:22:05 GMT\r\ncontent-length: 484\r\n\r\n",
+      "requestHeader": "GET http://127.0.0.1:51012/api/v1/orders/1 HTTP/1.1\r\nContent-Length: 0\r\nhost: 127.0.0.1:51012\r\nUser-Agent: Java-http-client/21.0.9\r\nX-Request-ID: AUDIT-POC-02-before\r\n\r\n",
+      "id": "37",
+      "type": "1",
+      "timestamp": "1790428925968",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "9",
+      "responseBody": "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"CONFIRMED\",\"orderDate\":\"2026-09-26T18:52:05.893751\",\"lastUpdated\":\"2026-09-26T18:52:05.994445\",\"deliveryAddress\":\"Local audit test fixture\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10.00,\"deliveryFee\":1.00,\"tax\":1.00,\"totalAmount\":12.00,\"orderItems\":[{\"id\":1,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10.00,\"totalPrice\":10.00}]}",
+      "cookieParams": "",
+      "requestBody": "{\"status\":\"CONFIRMED\"}",
+      "responseHeader": "HTTP/1.1 200\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:22:05 GMT\r\ncontent-length: 487\r\n\r\n",
+      "requestHeader": "PATCH http://127.0.0.1:51012/api/v1/orders/1/status HTTP/1.1\r\nContent-Length: 22\r\nhost: 127.0.0.1:51012\r\nUser-Agent: Java-http-client/21.0.9\r\nContent-Type: application/json\r\nX-Request-ID: AUDIT-POC-03-confirm\r\n\r\n",
+      "id": "38",
+      "type": "1",
+      "timestamp": "1790428925990",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "12",
+      "responseBody": "{\"message\":\"Order in CONFIRMED status can only transition to PREPARING or CANCELLED\",\"status\":400}",
+      "cookieParams": "",
+      "requestBody": "{\"status\":\"DELIVERED\"}",
+      "responseHeader": "HTTP/1.1 400\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:22:06 GMT\r\nConnection: close\r\ncontent-length: 98\r\n\r\n",
+      "requestHeader": "PATCH http://127.0.0.1:51012/api/v1/orders/1/status HTTP/1.1\r\nContent-Length: 22\r\nhost: 127.0.0.1:51012\r\nUser-Agent: Java-http-client/21.0.9\r\nContent-Type: application/json\r\nX-Request-ID: AUDIT-POC-04-rejected-transition\r\n\r\n",
+      "id": "39",
+      "type": "1",
+      "timestamp": "1790428926003",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "5",
+      "responseBody": "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"CANCELLED\",\"orderDate\":\"2026-09-26T18:52:05.893751\",\"lastUpdated\":\"2026-09-26T18:52:06.022918\",\"deliveryAddress\":\"Local audit test fixture\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10.00,\"deliveryFee\":1.00,\"tax\":1.00,\"totalAmount\":12.00,\"orderItems\":[{\"id\":1,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10.00,\"totalPrice\":10.00}]}",
+      "cookieParams": "",
+      "requestBody": "{\"status\":\"CANCELLED\"}",
+      "responseHeader": "HTTP/1.1 200\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:22:06 GMT\r\ncontent-length: 487\r\n\r\n",
+      "requestHeader": "PATCH http://127.0.0.1:51012/api/v1/orders/1/status HTTP/1.1\r\nContent-Length: 22\r\nhost: 127.0.0.1:51012\r\nUser-Agent: Java-http-client/21.0.9\r\nContent-Type: application/json\r\nX-Request-ID: AUDIT-POC-05-cancel\r\n\r\n",
+      "id": "40",
+      "type": "1",
+      "timestamp": "1790428926020",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "9",
+      "responseBody": "",
+      "cookieParams": "",
+      "requestBody": "",
+      "responseHeader": "HTTP/1.1 204\r\nDate: Sat, 26 Sep 2026 13:22:06 GMT\r\n\r\n",
+      "requestHeader": "DELETE http://127.0.0.1:51012/api/v1/orders/1 HTTP/1.1\r\nContent-Length: 0\r\nhost: 127.0.0.1:51012\r\nUser-Agent: Java-http-client/21.0.9\r\nX-Request-ID: AUDIT-POC-06-delete\r\n\r\n",
+      "id": "41",
+      "type": "1",
+      "timestamp": "1790428926029",
+      "tags": []
+    },
+    {
+      "note": "",
+      "rtt": "3",
+      "responseBody": "{\"message\":\"Order not found with ID: 1\",\"status\":404}",
+      "cookieParams": "",
+      "requestBody": "",
+      "responseHeader": "HTTP/1.1 404\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:22:06 GMT\r\ncontent-length: 53\r\n\r\n",
+      "requestHeader": "GET http://127.0.0.1:51012/api/v1/orders/1 HTTP/1.1\r\nContent-Length: 0\r\nhost: 127.0.0.1:51012\r\nUser-Agent: Java-http-client/21.0.9\r\nX-Request-ID: AUDIT-POC-07-after\r\n\r\n",
+      "id": "42",
+      "type": "1",
+      "timestamp": "1790428926041",
+      "tags": [
+        "JSON"
+      ]
+    }
+  ]
+}

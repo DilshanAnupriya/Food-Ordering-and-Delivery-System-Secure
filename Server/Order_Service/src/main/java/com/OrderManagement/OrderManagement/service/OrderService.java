@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 @Service
 public class OrderService {
 
+    public static final int MAX_PAGE_SIZE = 100;
+
     @Autowired
     private OrderRepository orderRepository;
 
@@ -29,7 +31,15 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    // ORIGINAL implementation: accepted an unrestricted Pageable.
+    //     public Page<OrderModel> getOrdersPaginated(Pageable pageable) {
+    //         return orderRepository.findAll(pageable);
+    //     }
+    // FIX: validate pagination before database queries or other side effects.
     public Page<OrderModel> getOrdersPaginated(Pageable pageable) {
+        if (pageable == null || pageable.isUnpaged() || pageable.getPageSize() > MAX_PAGE_SIZE) {
+            throw new OrderException("Page size must be between 1 and " + MAX_PAGE_SIZE, HttpStatus.BAD_REQUEST);
+        }
         return orderRepository.findAll(pageable);
     }
 

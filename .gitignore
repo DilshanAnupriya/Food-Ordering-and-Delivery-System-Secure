@@ -1,0 +1,3 @@
+# Local notification delivery database (contains runtime state).
+/data/
+/Server/notification/data/

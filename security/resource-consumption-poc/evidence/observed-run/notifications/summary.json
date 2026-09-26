@@ -1,0 +1,70 @@
+{
+  "finding" : "Repeated notification requests",
+  "recordedAtUtc" : "2026-09-26T09:20:58.276380Z",
+  "springBootVersion" : "3.4.5",
+  "javaVersion" : "21.0.9",
+  "httpHost" : "127.0.0.1",
+  "httpPort" : 63870,
+  "requestCount" : 6,
+  "durationMs" : 5209,
+  "responses" : [ {
+    "requestNumber" : 1,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "0" ],
+      "date" : [ "Sat, 26 Sep 2026 09:20:58 GMT" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : ""
+  }, {
+    "requestNumber" : 2,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "0" ],
+      "date" : [ "Sat, 26 Sep 2026 09:20:58 GMT" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : ""
+  }, {
+    "requestNumber" : 3,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "0" ],
+      "date" : [ "Sat, 26 Sep 2026 09:20:58 GMT" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : ""
+  }, {
+    "requestNumber" : 4,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "0" ],
+      "date" : [ "Sat, 26 Sep 2026 09:20:58 GMT" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : ""
+  }, {
+    "requestNumber" : 5,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "0" ],
+      "date" : [ "Sat, 26 Sep 2026 09:20:58 GMT" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : ""
+  }, {
+    "requestNumber" : 6,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "0" ],
+      "date" : [ "Sat, 26 Sep 2026 09:20:58 GMT" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : ""
+  } ],
+  "capturedEmails" : 6,
+  "smtpHost" : "127.0.0.1",
+  "smtpPort" : 63868,
+  "scope" : "Direct service HTTP and actual JavaMailSender delivery to local GreenMail; no real SMTP provider.",
+  "limitation" : "Six accepted requests demonstrate repeated delivery without throttling in this sample; they do not establish absence of a higher threshold, quota exhaustion, or service outage."
+}
