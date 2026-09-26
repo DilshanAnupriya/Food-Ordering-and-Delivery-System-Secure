@@ -99,18 +99,25 @@ public class OrderController {
                                                         @RequestBody Map<String, String> statusRequest,
                                                         @RequestHeader(value = "X-Auth-User-Id", required = false) String callerUserId,
                                                         @RequestHeader(value = "X-Auth-Roles", required = false) String callerRoles) {
-        if (!statusRequest.containsKey("status")) {
-            return ResponseEntity.badRequest().build();
+        // ORIGINAL: if (!statusRequest.containsKey("status")) {
+        // AUDIT FIX: null/blank values must also reach the audited exception handler.
+        if (statusRequest.get("status") == null || statusRequest.get("status").isBlank()) {
+            // ORIGINAL: return ResponseEntity.badRequest().build();
+            throw new OrderException("Status is required", HttpStatus.BAD_REQUEST);
         }
 
         assertCanModify(orderId, callerUserId, callerRoles);
 
         try {
-            OrderStatus status = OrderStatus.valueOf(statusRequest.get("status").toUpperCase());
+            // ORIGINAL: OrderStatus status = OrderStatus.valueOf(statusRequest.get("status").toUpperCase());
+            // AUDIT FIX: parse consistently regardless of the server locale.
+            OrderStatus status = OrderStatus.valueOf(statusRequest.get("status").toUpperCase(java.util.Locale.ROOT));
             OrderModel updatedOrder = orderService.updateOrderStatus(orderId, status);
             return ResponseEntity.ok(updatedOrder);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            // ORIGINAL: return ResponseEntity.badRequest().build();
+            // AUDIT FIX: retain HTTP 400 and record invalid enum values through the common handler.
+            throw new OrderException("Invalid order status", HttpStatus.BAD_REQUEST);
         }
     }
 

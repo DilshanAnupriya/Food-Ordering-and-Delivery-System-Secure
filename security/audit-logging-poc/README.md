@@ -20,4 +20,8 @@ The macOS runner selects JDK 21 when JAVA_HOME is unset. Passing means the origi
 
 ## Scope
 
-No gateway, external monitoring system, live SMTP, production MySQL or real customer records were used. Ordinary SQL and framework logs are present. The demonstrated gap is missing application audit events for the tested order operations. The synthetic userId is not authenticated caller evidence. No production fix, commit or push was made.
+No gateway, external monitoring system, live SMTP, production MySQL or real customer records were used. Ordinary SQL and framework logs are present. The demonstrated gap is missing application audit events for the tested order operations. The synthetic userId is not authenticated caller evidence. The original test did not apply a fix. A separate secure-repository remediation and fixed-source harness are now available in [REMEDIATION.md](REMEDIATION.md) and `fixed/`. No commit or push was made.
+
+## Implemented remediation
+
+Read [REMEDIATION.md](REMEDIATION.md) for every changed file, comments preserving replaced code, deployment settings, actual fixed ZAP results and screenshot guidance. Run `bash fixed/run.sh` for the secure-source tests. Before evidence remains in `evidence/zap-run/`; after evidence is in `evidence/fixed-zap-run/`.

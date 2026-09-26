@@ -78,7 +78,7 @@ Content-Type: application/json
 | Order application package log events | 0 |
 | Automated PoC | 1 test passed, 0 failures/errors |
 
-A passing test means the original missing audit trail was reproduced. **No remediation or after-fix test has been performed for this new finding.** The result is limited to the local service and observation interval; it does not establish that every deployment lacks external access logs, database auditing or security monitoring. The synthetic request's `userId` is data, not evidence of an authenticated caller. No absence-of-alerts claim was tested.
+A passing test means the original missing audit trail was reproduced. The original before-fix observations are preserved here. **The remediation is now implemented and separately verified; see [REMEDIATION.md](REMEDIATION.md).** The result is limited to the local service and observation interval; it does not establish that every deployment lacks external access logs, database auditing or security monitoring. The synthetic request's `userId` is data, not evidence of an authenticated caller. No absence-of-alerts claim was tested.
 
 #### Figures to Include
 
@@ -90,9 +90,9 @@ A passing test means the original missing audit trail was reproduced. **No remed
 
 ZAP screenshots establish the HTTP operations and outcomes. **The application log capture and source review provide the evidence of insufficient audit logging.** An empty ZAP Alerts tab is not evidence for this finding.
 
-#### Recommended Remediation — Not Yet Implemented
+#### Remediation & Code Diff
 
-Record structured security events for successful order changes/deletions and relevant failures. Include a server-verified actor identity when available, event timestamp, action, affected order ID, outcome and correlation ID. Preserve permitted before/after status values where useful. Use a protected audit destination with retention and restricted write/read access; avoid recording passwords, tokens or unnecessary personal data. Emit success events consistently with committed database changes, and record denied operations even when their transaction fails. Where repeated suspicious failures need detection, configure an alert rule and test it separately. These controls follow the [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html).
+The secure repository now records structured security events for successful order changes/deletions and relevant failures. See [the implementation, code diff, tested results and after-fix figures](REMEDIATION.md). The following describes the design and remaining operational controls: Include a server-verified actor identity when available, event timestamp, action, affected order ID, outcome and correlation ID. Preserve permitted before/after status values where useful. Use a protected audit destination with retention and restricted write/read access; avoid recording passwords, tokens or unnecessary personal data. Emit success events consistently with committed database changes, and record denied operations even when their transaction fails. Where repeated suspicious failures need detection, configure an alert rule and test it separately. These controls follow the [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html).
 
 #### Evidence Files
 

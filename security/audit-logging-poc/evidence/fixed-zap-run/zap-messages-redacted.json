@@ -1,0 +1,197 @@
+{
+  "messages": [
+    {
+      "note": "",
+      "rtt": "69",
+      "responseBody": "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"PLACED\",\"orderDate\":\"2026-09-26T19:26:44.337988\",\"lastUpdated\":\"2026-09-26T19:26:44.338\",\"deliveryAddress\":\"Local synthetic address\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10,\"deliveryFee\":1,\"tax\":1,\"totalAmount\":12,\"orderItems\":[{\"id\":1,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10,\"totalPrice\":10}]}",
+      "cookieParams": "",
+      "requestBody": "{\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\n \"deliveryAddress\":\"Local synthetic address\",\"contactPhone\":\"0000000000\",\n \"deliveryFee\":1,\"tax\":1,\"orderItems\":[{\"menuItemId\":\"POC-MENU-001\",\n \"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10,\"totalPrice\":10}]}\n",
+      "responseHeader": "HTTP/1.1 201\r\nX-Request-ID: c5745be1-0ebb-47b2-9b1a-f8f4214b51ce\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\ncontent-length: 462\r\n\r\n",
+      "requestHeader": "POST http://127.0.0.1:51160/api/v1/orders HTTP/1.1\r\nContent-Length: 287\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nContent-Type: application/json\r\nX-Audit-Test-Step: 01-create\r\nX-Auth-User-Id: POC-AUDIT-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "53",
+      "type": "1",
+      "timestamp": "1790431004288",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "8",
+      "responseBody": "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"PLACED\",\"orderDate\":\"2026-09-26T19:26:44.337988\",\"lastUpdated\":\"2026-09-26T19:26:44.338\",\"deliveryAddress\":\"Local synthetic address\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10.00,\"deliveryFee\":1.00,\"tax\":1.00,\"totalAmount\":12.00,\"orderItems\":[{\"id\":1,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10.00,\"totalPrice\":10.00}]}",
+      "cookieParams": "",
+      "requestBody": "",
+      "responseHeader": "HTTP/1.1 200\r\nX-Request-ID: 4f73d010-4b34-47c7-ac08-1406263bc6f4\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\ncontent-length: 480\r\n\r\n",
+      "requestHeader": "GET http://127.0.0.1:51160/api/v1/orders/1 HTTP/1.1\r\nContent-Length: 0\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nX-Audit-Test-Step: 02-read\r\nX-Auth-User-Id: POC-AUDIT-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "57",
+      "type": "1",
+      "timestamp": "1790431004371",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "18",
+      "responseBody": "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"PLACED\",\"orderDate\":\"2026-09-26T19:26:44.337988\",\"lastUpdated\":\"2026-09-26T19:26:44.395299\",\"deliveryAddress\":\"Updated synthetic address\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10,\"deliveryFee\":1.00,\"tax\":1.00,\"totalAmount\":12.00,\"orderItems\":[{\"id\":2,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10,\"totalPrice\":10}]}",
+      "cookieParams": "",
+      "requestBody": "{\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\n \"deliveryAddress\":\"Updated synthetic address\",\"contactPhone\":\"0000000000\",\n \"deliveryFee\":1,\"tax\":1,\"orderItems\":[{\"menuItemId\":\"POC-MENU-001\",\n \"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10,\"totalPrice\":10}]}\n",
+      "responseHeader": "HTTP/1.1 200\r\nX-Request-ID: 4f366a85-03d9-425b-a556-24f228e6559f\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\ncontent-length: 476\r\n\r\n",
+      "requestHeader": "PUT http://127.0.0.1:51160/api/v1/orders/1 HTTP/1.1\r\nContent-Length: 289\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nContent-Type: application/json\r\nX-Audit-Test-Step: 03-update\r\nX-Auth-User-Id: POC-AUDIT-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "58",
+      "type": "1",
+      "timestamp": "1790431004387",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "8",
+      "responseBody": "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"CONFIRMED\",\"orderDate\":\"2026-09-26T19:26:44.337988\",\"lastUpdated\":\"2026-09-26T19:26:44.413482\",\"deliveryAddress\":\"Updated synthetic address\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10.00,\"deliveryFee\":1.00,\"tax\":1.00,\"totalAmount\":12.00,\"orderItems\":[{\"id\":2,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10.00,\"totalPrice\":10.00}]}",
+      "cookieParams": "",
+      "requestBody": "{\"status\":\"CONFIRMED\"}",
+      "responseHeader": "HTTP/1.1 200\r\nX-Request-ID: bb697c47-eb3a-4d01-a685-2e1d1bd48eee\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\ncontent-length: 488\r\n\r\n",
+      "requestHeader": "PATCH http://127.0.0.1:51160/api/v1/orders/1/status HTTP/1.1\r\nContent-Length: 22\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nContent-Type: application/json\r\nX-Audit-Test-Step: 04-confirm\r\nX-Auth-User-Id: POC-AUDIT-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "60",
+      "type": "1",
+      "timestamp": "1790431004408",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "11",
+      "responseBody": "{\"message\":\"Order in CONFIRMED status can only transition to PREPARING or CANCELLED\",\"status\":400}",
+      "cookieParams": "",
+      "requestBody": "{\"status\":\"DELIVERED\"}",
+      "responseHeader": "HTTP/1.1 400\r\nX-Request-ID: bcd37c72-fb43-42a8-b674-6e677fb2e094\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\nConnection: close\r\ncontent-length: 98\r\n\r\n",
+      "requestHeader": "PATCH http://127.0.0.1:51160/api/v1/orders/1/status HTTP/1.1\r\nContent-Length: 22\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nContent-Type: application/json\r\nX-Audit-Test-Step: 05-rejected-transition\r\nX-Auth-User-Id: POC-AUDIT-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "61",
+      "type": "1",
+      "timestamp": "1790431004421",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "6",
+      "responseBody": "{\"message\":\"You are not authorized to access this order\",\"status\":403}",
+      "cookieParams": "",
+      "requestBody": "{\"status\":\"CANCELLED\"}",
+      "responseHeader": "HTTP/1.1 403\r\nX-Request-ID: 47489ee8-5be5-42cd-b2e6-70c090f8aba8\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\ncontent-length: 70\r\n\r\n",
+      "requestHeader": "PATCH http://127.0.0.1:51160/api/v1/orders/1/status HTTP/1.1\r\nContent-Length: 22\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nContent-Type: application/json\r\nX-Audit-Test-Step: 06-denied\r\nX-Auth-User-Id: POC-OTHER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "63",
+      "type": "1",
+      "timestamp": "1790431004440",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "5",
+      "responseBody": "{\"message\":\"Status is required\",\"status\":400}",
+      "cookieParams": "",
+      "requestBody": "{\"status\":null}",
+      "responseHeader": "HTTP/1.1 400\r\nX-Request-ID: e4337364-6297-48f3-97b5-12ef52cdd3a6\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\nConnection: close\r\ncontent-length: 45\r\n\r\n",
+      "requestHeader": "PATCH http://127.0.0.1:51160/api/v1/orders/1/status HTTP/1.1\r\nContent-Length: 15\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nContent-Type: application/json\r\nX-Audit-Test-Step: 07-null-status\r\nX-Auth-User-Id: POC-AUDIT-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "64",
+      "type": "1",
+      "timestamp": "1790431004450",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "5",
+      "responseBody": "{\"message\":\"Invalid order status\",\"status\":400}",
+      "cookieParams": "",
+      "requestBody": "{\"status\":\"INVALID\"}",
+      "responseHeader": "HTTP/1.1 400\r\nX-Request-ID: 425a0fff-7af6-46b4-82e0-a2b58602a7eb\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\nConnection: close\r\ncontent-length: 47\r\n\r\n",
+      "requestHeader": "PATCH http://127.0.0.1:51160/api/v1/orders/1/status HTTP/1.1\r\nContent-Length: 20\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nContent-Type: application/json\r\nX-Audit-Test-Step: 08-invalid-status\r\nX-Auth-User-Id: POC-AUDIT-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "65",
+      "type": "1",
+      "timestamp": "1790431004458",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "6",
+      "responseBody": "{\"message\":\"Invalid request\",\"status\":400}",
+      "cookieParams": "",
+      "requestBody": "{",
+      "responseHeader": "HTTP/1.1 400\r\nX-Request-ID: 52686e44-3aba-48f9-8b24-a9c08c1f6c84\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\nConnection: close\r\ncontent-length: 42\r\n\r\n",
+      "requestHeader": "PATCH http://127.0.0.1:51160/api/v1/orders/1/status HTTP/1.1\r\nContent-Length: 1\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nContent-Type: application/json\r\nX-Audit-Test-Step: 09-malformed-json\r\nX-Auth-User-Id: POC-AUDIT-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "66",
+      "type": "1",
+      "timestamp": "1790431004471",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "7",
+      "responseBody": "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"CANCELLED\",\"orderDate\":\"2026-09-26T19:26:44.337988\",\"lastUpdated\":\"2026-09-26T19:26:44.484664\",\"deliveryAddress\":\"Updated synthetic address\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10.00,\"deliveryFee\":1.00,\"tax\":1.00,\"totalAmount\":12.00,\"orderItems\":[{\"id\":2,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10.00,\"totalPrice\":10.00}]}",
+      "cookieParams": "",
+      "requestBody": "{\"status\":\"CANCELLED\"}",
+      "responseHeader": "HTTP/1.1 200\r\nX-Request-ID: beb6c615-e448-4a8f-b6cd-8ee35905d5b8\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\ncontent-length: 488\r\n\r\n",
+      "requestHeader": "PATCH http://127.0.0.1:51160/api/v1/orders/1/status HTTP/1.1\r\nContent-Length: 22\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nContent-Type: application/json\r\nX-Audit-Test-Step: 10-cancel\r\nX-Auth-User-Id: POC-AUDIT-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "67",
+      "type": "1",
+      "timestamp": "1790431004481",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "9",
+      "responseBody": "",
+      "cookieParams": "",
+      "requestBody": "",
+      "responseHeader": "HTTP/1.1 204\r\nX-Request-ID: a1a8700e-d109-4b58-9e4c-34e4e02d2954\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\n\r\n",
+      "requestHeader": "DELETE http://127.0.0.1:51160/api/v1/orders/1 HTTP/1.1\r\nContent-Length: 0\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nX-Audit-Test-Step: 11-delete\r\nX-Auth-User-Id: POC-AUDIT-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "68",
+      "type": "1",
+      "timestamp": "1790431004492",
+      "tags": []
+    },
+    {
+      "note": "",
+      "rtt": "4",
+      "responseBody": "{\"message\":\"Order not found with ID: 1\",\"status\":404}",
+      "cookieParams": "",
+      "requestBody": "",
+      "responseHeader": "HTTP/1.1 404\r\nX-Request-ID: 5c449ada-db95-41ce-b1d5-4a9b4dc3ee40\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\ncontent-length: 53\r\n\r\n",
+      "requestHeader": "GET http://127.0.0.1:51160/api/v1/orders/1 HTTP/1.1\r\nContent-Length: 0\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nAuthorization: [synthetic JWT redacted]\r\nX-Audit-Test-Step: 12-after-delete\r\nX-Auth-User-Id: POC-AUDIT-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "69",
+      "type": "1",
+      "timestamp": "1790431004506",
+      "tags": [
+        "JSON"
+      ]
+    },
+    {
+      "note": "",
+      "rtt": "5",
+      "responseBody": "{\"orderId\":2,\"userId\":\"SPOOFED-BODY-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"PLACED\",\"orderDate\":\"2026-09-26T19:26:44.521409\",\"lastUpdated\":\"2026-09-26T19:26:44.521428\",\"deliveryAddress\":\"Local synthetic address\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10,\"deliveryFee\":1,\"tax\":1,\"totalAmount\":12,\"orderItems\":[{\"id\":3,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10,\"totalPrice\":10}]}",
+      "cookieParams": "",
+      "requestBody": "{\"userId\":\"SPOOFED-BODY-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\n \"deliveryAddress\":\"Local synthetic address\",\"contactPhone\":\"0000000000\",\n \"deliveryFee\":1,\"tax\":1,\"orderItems\":[{\"menuItemId\":\"POC-MENU-001\",\n \"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10,\"totalPrice\":10}]}\n",
+      "responseHeader": "HTTP/1.1 201\r\nX-Request-ID: 091bba4c-205e-4215-9ff1-82fe4bc39819\r\nContent-Type: application/json\r\nDate: Sat, 26 Sep 2026 13:56:44 GMT\r\ncontent-length: 468\r\n\r\n",
+      "requestHeader": "POST http://127.0.0.1:51160/api/v1/orders HTTP/1.1\r\nContent-Length: 290\r\nhost: 127.0.0.1:51160\r\nUser-Agent: Java-http-client/21.0.9\r\nContent-Type: application/json\r\nX-Audit-Test-Step: 13-unverified-identity\r\nX-Auth-User-Id: SPOOFED-HEADER-OWNER\r\nX-Request-ID: client-value-must-be-replaced\r\n\r\n",
+      "id": "70",
+      "type": "1",
+      "timestamp": "1790431004519",
+      "tags": [
+        "JSON"
+      ]
+    }
+  ]
+}

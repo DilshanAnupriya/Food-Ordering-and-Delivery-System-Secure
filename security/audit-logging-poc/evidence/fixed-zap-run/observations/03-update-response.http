@@ -1,0 +1,4 @@
+HTTP 200
+{content-length=[476], content-type=[application/json], date=[Sat, 26 Sep 2026 13:56:44 GMT], x-request-id=[4f366a85-03d9-425b-a556-24f228e6559f]}
+
+{"orderId":1,"userId":"POC-AUDIT-OWNER","restaurantId":"POC-AUDIT-RESTAURANT","status":"PLACED","orderDate":"2026-09-26T19:26:44.337988","lastUpdated":"2026-09-26T19:26:44.395299","deliveryAddress":"Updated synthetic address","latitude":null,"longitude":null,"contactPhone":"0000000000","subtotal":10,"deliveryFee":1.00,"tax":1.00,"totalAmount":12.00,"orderItems":[{"id":2,"menuItemId":"POC-MENU-001","itemName":"Audit test meal","quantity":1,"unitPrice":10,"totalPrice":10}]}
