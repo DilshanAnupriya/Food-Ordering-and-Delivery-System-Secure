@@ -1,0 +1,8 @@
+POST http://127.0.0.1:51160/api/v1/orders
+X-Auth-User-Id: POC-AUDIT-OWNER
+Authorization: [synthetic test JWT redacted]
+
+{"userId":"POC-AUDIT-OWNER","restaurantId":"POC-AUDIT-RESTAURANT",
+ "deliveryAddress":"Local synthetic address","contactPhone":"0000000000",
+ "deliveryFee":1,"tax":1,"orderItems":[{"menuItemId":"POC-MENU-001",
+ "itemName":"Audit test meal","quantity":1,"unitPrice":10,"totalPrice":10}]}

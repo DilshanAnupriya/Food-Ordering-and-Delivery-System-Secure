@@ -1,6 +1,8 @@
 package com.OrderManagement.OrderManagement.service;
 
 import com.OrderManagement.OrderManagement.exception.OrderException;
+import com.OrderManagement.OrderManagement.audit.SecurityAuditService;
+import static com.OrderManagement.OrderManagement.audit.SecurityAuditEvent.Action.*;
 import com.OrderManagement.OrderManagement.model.OrderItem;
 import com.OrderManagement.OrderManagement.model.OrderModel;
 import com.OrderManagement.OrderManagement.model.OrderStatus;
@@ -26,6 +28,9 @@ public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private SecurityAuditService securityAudit;
 
     public List<OrderModel> getAllOrders() {
         return orderRepository.findAll();
@@ -77,7 +82,11 @@ public class OrderService {
         // Recalculate totals to ensure consistency
         calculateOrderTotals(order);
 
-        return orderRepository.save(order);
+        // ORIGINAL: return orderRepository.save(order);
+        // AUDIT FIX: insert the event in the same transaction; neither write may commit alone.
+        OrderModel saved = orderRepository.save(order);
+        securityAudit.success(CREATE_ORDER, saved.getOrderId(), null, saved.getStatus(), 201);
+        return saved;
     }
 
     private void calculateOrderTotals(OrderModel order) {
@@ -145,6 +154,9 @@ public class OrderService {
 
         OrderModel existingOrder = orderRepository.findById(orderId)
                 .orElseThrow(() -> new OrderException("Order not found with ID: " + orderId, HttpStatus.NOT_FOUND));
+
+        // AUDIT FIX: retain the previous state before any mutation.
+        OrderStatus previousStatus = existingOrder.getStatus();
 
         // Check if order is in a terminal state
         if ((existingOrder.getStatus() == OrderStatus.DELIVERED || existingOrder.getStatus() == OrderStatus.CANCELLED)
@@ -220,7 +232,11 @@ public class OrderService {
         }
 
         existingOrder.setLastUpdated(LocalDateTime.now());
-        return orderRepository.save(existingOrder);
+        // ORIGINAL: return orderRepository.save(existingOrder);
+        // AUDIT FIX: record the update without logging addresses, phone numbers or request bodies.
+        OrderModel saved = orderRepository.save(existingOrder);
+        securityAudit.success(UPDATE_ORDER, orderId, previousStatus, saved.getStatus(), 200);
+        return saved;
     }
 
     @Transactional
@@ -239,6 +255,8 @@ public class OrderService {
         }
 
         orderRepository.deleteById(orderId);
+        // AUDIT FIX: a scalar order ID survives deletion; audit and deletion commit together.
+        securityAudit.success(DELETE_ORDER, orderId, order.getStatus(), null, 204);
         return true;
     }
 
@@ -255,13 +273,20 @@ public class OrderService {
         OrderModel existingOrder = orderRepository.findById(orderId)
                 .orElseThrow(() -> new OrderException("Order not found with ID: " + orderId, HttpStatus.NOT_FOUND));
 
+        // AUDIT FIX: capture the original status before overwriting it.
+        OrderStatus previousStatus = existingOrder.getStatus();
+
         // Validate status transition
         validateStatusTransition(existingOrder.getStatus(), status);
 
         existingOrder.setStatus(status);
         existingOrder.setLastUpdated(LocalDateTime.now());
 
-        return orderRepository.save(existingOrder);
+        // ORIGINAL: return orderRepository.save(existingOrder);
+        // AUDIT FIX: retain both states and the verified caller for later investigation.
+        OrderModel saved = orderRepository.save(existingOrder);
+        securityAudit.success(CHANGE_STATUS, orderId, previousStatus, saved.getStatus(), 200);
+        return saved;
     }
 
     private void validateStatusTransition(OrderStatus currentStatus, OrderStatus newStatus) {

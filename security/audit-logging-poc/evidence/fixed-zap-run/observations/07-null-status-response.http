@@ -1,0 +1,4 @@
+HTTP 400
+{connection=[close], content-length=[45], content-type=[application/json], date=[Sat, 26 Sep 2026 13:56:44 GMT], x-request-id=[e4337364-6297-48f3-97b5-12ef52cdd3a6]}
+
+{"message":"Status is required","status":400}

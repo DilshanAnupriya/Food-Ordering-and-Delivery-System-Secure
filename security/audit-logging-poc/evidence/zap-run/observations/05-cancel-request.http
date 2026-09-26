@@ -1,0 +1,5 @@
+PATCH http://127.0.0.1:51012/api/v1/orders/1/status HTTP/1.1
+X-Request-ID: AUDIT-POC-05-cancel
+Content-Type: application/json
+
+{"status":"CANCELLED"}

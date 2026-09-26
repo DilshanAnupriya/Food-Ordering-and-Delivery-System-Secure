@@ -1,0 +1,4 @@
+HTTP 400
+{connection=[close], content-length=[98], content-type=[application/json], date=[Sat, 26 Sep 2026 13:56:44 GMT], x-request-id=[bcd37c72-fb43-42a8-b674-6e677fb2e094]}
+
+{"message":"Order in CONFIRMED status can only transition to PREPARING or CANCELLED","status":400}

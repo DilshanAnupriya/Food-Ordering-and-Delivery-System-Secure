@@ -1,0 +1,45 @@
+2026-09-26 13:22:04,132 INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2026-09-26 13:22:04,156 INFO  org.apache.maven.surefire.booter.ForkedBooter - Starting ForkedBooter v3.5.2 using Java 21.0.9 with PID 73145 (started by vidurahewaduwa in /Users/vidurahewaduwa/Documents/GitHub/Food-Ordering-and-Delivery-System-Secure/security/audit-logging-poc)
+2026-09-26 13:22:04,157 INFO  org.apache.maven.surefire.booter.ForkedBooter - No active profile set, falling back to 1 default profile: "default"
+2026-09-26 13:22:04,444 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-26 13:22:04,468 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2026-09-26 13:22:04,675 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+2026-09-26 13:22:04,682 INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-127.0.0.1-auto-1"]
+2026-09-26 13:22:04,683 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-09-26 13:22:04,683 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2026-09-26 13:22:04,702 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-09-26 13:22:04,702 INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 529 ms
+2026-09-26 13:22:04,771 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-26 13:22:04,799 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2026-09-26 13:22:04,814 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-09-26 13:22:04,932 INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-26 13:22:04,945 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-09-26 13:22:05,023 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:audit_8d3317fb-5d11-40d3-a9f2-ac71e404e1b3 user=SA
+2026-09-26 13:22:05,024 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-09-26 13:22:05,036 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-26 13:22:05,044 INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-09-26 13:22:05,479 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-26 13:22:05,500 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-26 13:22:05,647 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-26 13:22:05,788 INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-127.0.0.1-auto-1"]
+2026-09-26 13:22:05,799 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 51012 (http) with context path '/'
+2026-09-26 13:22:05,804 INFO  org.apache.maven.surefire.booter.ForkedBooter - Started ForkedBooter in 1.84 seconds (process running for 2.277)
+2026-09-26 13:22:05,805 INFO  local.security.HarnessControl - POC_CAPTURE_BEGIN: synthetic fixture requests; harness marker only
+2026-09-26 13:22:05,847 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-26 13:22:05,847 INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-09-26 13:22:05,848 INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-09-26 13:22:06,318 INFO  local.security.HarnessControl - POC_CAPTURE_END: synthetic fixture requests; harness marker only
+2026-09-26 13:22:06,321 INFO  org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-09-26 13:22:06,322 INFO  org.apache.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-127.0.0.1-auto-1-51012"]
+2026-09-26 13:22:06,323 INFO  org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-09-26 13:22:06,323 INFO  org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-127.0.0.1-auto-1"]
+2026-09-26 13:22:06,324 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-09-26 13:22:06,326 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-09-26 13:22:06,327 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
