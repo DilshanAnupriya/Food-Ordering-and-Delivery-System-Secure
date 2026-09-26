@@ -4,6 +4,7 @@ package com.example.pos1.pos1.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity(name = "application_user")
@@ -38,6 +39,17 @@ public class ApplicationUser {
 
     @Column(name = "is_enabled",columnDefinition = "TINYINT")
     private boolean isEnabled;
+
+    // ----- Brute-force / account-lockout tracking (fix: V-AuthWeakness Test 4 - No lockout) -----
+    // Number of consecutive failed login attempts. Reset to 0 on a successful login.
+    // DEFAULT 0 so existing rows are backfilled when the column is added (avoids
+    // reading SQL NULL into a primitive int).
+    @Column(name = "failed_attempts", columnDefinition = "INT DEFAULT 0")
+    private int failedAttempts;
+
+    // Timestamp when the account was locked; used to auto-unlock after the lock window elapses.
+    @Column(name = "lock_time")
+    private LocalDateTime lockTime;
 
     private String restaurantId;
 
