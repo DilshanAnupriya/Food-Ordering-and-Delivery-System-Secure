@@ -1,0 +1,78 @@
+{
+  "finding" : "Repeated notification requests",
+  "recordedAtUtc" : "2026-09-26T11:50:25.549050Z",
+  "springBootVersion" : "3.4.5",
+  "javaVersion" : "21.0.9",
+  "httpHost" : "127.0.0.1",
+  "httpPort" : 49864,
+  "zapProxy" : "http://127.0.0.1:8080",
+  "requestCount" : 6,
+  "durationMs" : 5307,
+  "responses" : [ {
+    "requestNumber" : 1,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "25" ],
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:50:25 GMT" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"deliveryStatus\":\"SENT\"}"
+  }, {
+    "requestNumber" : 2,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "33" ],
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:50:25 GMT" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"deliveryStatus\":\"ALREADY_SENT\"}"
+  }, {
+    "requestNumber" : 3,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "33" ],
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:50:25 GMT" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"deliveryStatus\":\"ALREADY_SENT\"}"
+  }, {
+    "requestNumber" : 4,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "33" ],
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:50:25 GMT" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"deliveryStatus\":\"ALREADY_SENT\"}"
+  }, {
+    "requestNumber" : 5,
+    "status" : 200,
+    "headers" : {
+      "content-length" : [ "33" ],
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:50:25 GMT" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"deliveryStatus\":\"ALREADY_SENT\"}"
+  }, {
+    "requestNumber" : 6,
+    "status" : 429,
+    "headers" : {
+      "content-length" : [ "93" ],
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:50:25 GMT" ],
+      "retry-after" : [ "55" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"error\":\"RATE_LIMIT_EXCEEDED\",\"message\":\"Notification request limit exceeded. Retry later.\"}"
+  } ],
+  "capturedEmails" : 1,
+  "smtpHost" : "127.0.0.1",
+  "smtpPort" : 49863,
+  "scope" : "Direct service HTTP and actual JavaMailSender delivery to local GreenMail; no real SMTP provider.",
+  "limitation" : "Confirms duplicate suppression and the configured five-request quota; uses local GreenMail and isolated H2 only."
+}

@@ -289,10 +289,15 @@ const ResCreate = () => {
 
                 // Send restaurant creation confirmation email
                 try {
+                    // FIX: use the saved restaurant ID for the notification event identity.
+                    // ORIGINAL: the notification payload omitted restaurantId entirely.
+                    const savedRestaurant = await axios.get(
+                        `http://localhost:8082/api/v1/restaurants/by-name/${encodeURIComponent(formData.restaurantName)}`
                     await axios.post(
                         `http://localhost:8080/api/notifications/restaurant-confirmation`,
                         {
                             email: formData.restaurantEmail,
+                            restaurantId: savedRestaurant.data.data,
                             restaurantName: formData.restaurantName,
                             restaurantType: formData.restaurantType,
                             address: formData.restaurantAddress,

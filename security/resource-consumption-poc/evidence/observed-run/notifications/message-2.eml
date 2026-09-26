@@ -1,0 +1,41 @@
+Return-Path: <poc-sender@example.test>
+Received: from 127.0.0.1 (HELO 10.72.158.85); Sat Sep 26 14:50:58 IST 2026
+Date: Sat, 26 Sep 2026 14:50:58 +0530 (IST)
+To: vidura-test@example.test
+Message-ID: <1065387758.5.1790414458238@[10.72.158.85]>
+Subject: Payment Confirmation - Order #TEST-ORDER-001
+MIME-Version: 1.0
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_3_1508838803.1790414458236"
+
+------=_Part_3_1508838803.1790414458236
+Content-Type: multipart/related; 
+	boundary="----=_Part_4_212649113.1790414458236"
+
+------=_Part_4_212649113.1790414458236
+Content-Type: text/html;charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<html>
+<body style='font-family: Arial, sans-serif; padding: 20px;'>
+    <h2 style='color: #333;'>Payment Confirmation</h2>
+    <div style='background-color: #f8f9fa; padding: 20px; border-radius: 5px;'>
+        <p>Dear Customer,</p>
+        <p>Your payment has been successfully processed.</p>
+        <div style='margin: 20px 0; padding: 15px; background-color: #fff; border-radius: 5px;'>
+            <p><strong>Order ID:</strong> TEST-ORDER-001</p>
+            <p><strong>Amount Paid:</strong> $25.00</p>
+            <p><strong>Status:</strong> SUCCESS</p>
+        </div>
+        <p>Thank you for your purchase!</p>
+        <p>If you have any questions, please don't hesitate to contact our support team.</p>
+    </div>
+    <div style='margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;'>
+        <p style='color: #666; font-size: 12px;'>This is an automated message, please do not reply.</p>
+    </div>
+</body>
+</html>
+
+------=_Part_4_212649113.1790414458236--
+
+------=_Part_3_1508838803.1790414458236--
