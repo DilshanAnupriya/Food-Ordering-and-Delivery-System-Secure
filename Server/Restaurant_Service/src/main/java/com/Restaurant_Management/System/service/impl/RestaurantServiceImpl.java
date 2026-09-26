@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import com.Restaurant_Management.System.util.PaginationLimits;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -106,7 +107,41 @@ public class  RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
+    // ORIGINAL implementation: accepted any page size and updated search history before validation.
+    //     public RestaurantResponsePaginateDto findAllRestaurant(String searchText, int page, int size) {
+    //
+    //         if (restaurantRepo.existsRestaurantByRestaurantName(searchText)) {
+    //             String imageUrl = restaurantRepo.findRestaurantImageUrlByRestaurantName(searchText);
+    //             SearchHistory searchHistory = searchHistoryRepo.findSearchHistoriesByRestaurantName(searchText);
+    //
+    //             if (searchHistory != null) {
+    //                 searchHistory.setSearchCount(searchHistory.getSearchCount() + 1);
+    //                 searchHistory.setLatestCountAt(LocalDateTime.now());
+    //
+    //             } else {
+    //                 searchHistory = new SearchHistory();
+    //                 searchHistory.setSearch_id(UUID.randomUUID().toString());
+    //                 searchHistory.setRestaurantName(searchText);
+    //                 searchHistory.setSearchCount(1);
+    //                 searchHistory.setLatestCountAt(LocalDateTime.now());
+    //                 searchHistory.setUrl(imageUrl);
+    //             }
+    //
+    //             searchHistoryRepo.save(searchHistory);
+    //         }
+    //         return RestaurantResponsePaginateDto.builder()
+    //                 .dataCount(restaurantRepo.countAllRestaurant(searchText))
+    //                 .dataList(
+    //                         restaurantRepo.findAllRestaurant(searchText, PageRequest.of(page,size))
+    //                 .stream()
+    //                 .map(this::toRestaurantResponseDto)
+    //                 .collect(Collectors.toList()))
+    //                 .build();
+    //     }
+    // FIX: validate pagination before database queries or other side effects.
     public RestaurantResponsePaginateDto findAllRestaurant(String searchText, int page, int size) {
+
+        PaginationLimits.validate(page, size);
 
         if (restaurantRepo.existsRestaurantByRestaurantName(searchText)) {
             String imageUrl = restaurantRepo.findRestaurantImageUrlByRestaurantName(searchText);

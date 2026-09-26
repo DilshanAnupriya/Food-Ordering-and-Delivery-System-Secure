@@ -1,0 +1,4 @@
+POST http://127.0.0.1:65025/api/notifications/payment-confirmation
+Content-Type: application/json
+
+{"email":"vidura-test@example.test","orderId":"TEST-ORDER-001","amount":25.00,"paymentStatus":"SUCCESS"}

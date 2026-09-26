@@ -5,6 +5,8 @@ import com.OrderManagement.OrderManagement.model.OrderModel;
 import com.OrderManagement.OrderManagement.model.OrderStatus;
 import com.OrderManagement.OrderManagement.service.OrderService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,11 +27,15 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    // ORIGINAL parameters (kept for the assignment's before/after comparison):
+    // @RequestParam(defaultValue = "0") int page,
+    // @RequestParam(defaultValue = "10") int size,
+    // FIX: reject negative pages and sizes outside 1..100 before building a query.
     // Get all orders with pagination
     @GetMapping
     public ResponseEntity<Map<String, Object>> getAllOrders(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "0") @Min(0) int page,
+            @RequestParam(defaultValue = "10") @Min(1) @Max(OrderService.MAX_PAGE_SIZE) int size,
             @RequestParam(defaultValue = "orderDate") String sortBy,
             @RequestParam(defaultValue = "desc") String direction) {
 
@@ -127,6 +133,7 @@ public class OrderController {
         return ResponseEntity.noContent().build();
     }
 
+
     /**
      * Object-level authorization guard for order modifications
      * (fix for V-BrokenAccess/IDOR Test 2).
@@ -165,3 +172,4 @@ public class OrderController {
         }
     }
 }
+
