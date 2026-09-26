@@ -1,0 +1,31 @@
+[ {
+  "timestampUtc" : "2026-09-26T13:22:05.805Z",
+  "logger" : "local.security.HarnessControl",
+  "level" : "INFO",
+  "message" : "POC_CAPTURE_BEGIN: synthetic fixture requests; harness marker only",
+  "mdc" : { }
+}, {
+  "timestampUtc" : "2026-09-26T13:22:05.847Z",
+  "logger" : "org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]",
+  "level" : "INFO",
+  "message" : "Initializing Spring DispatcherServlet 'dispatcherServlet'",
+  "mdc" : { }
+}, {
+  "timestampUtc" : "2026-09-26T13:22:05.847Z",
+  "logger" : "org.springframework.web.servlet.DispatcherServlet",
+  "level" : "INFO",
+  "message" : "Initializing Servlet 'dispatcherServlet'",
+  "mdc" : { }
+}, {
+  "timestampUtc" : "2026-09-26T13:22:05.848Z",
+  "logger" : "org.springframework.web.servlet.DispatcherServlet",
+  "level" : "INFO",
+  "message" : "Completed initialization in 1 ms",
+  "mdc" : { }
+}, {
+  "timestampUtc" : "2026-09-26T13:22:06.318Z",
+  "logger" : "local.security.HarnessControl",
+  "level" : "INFO",
+  "message" : "POC_CAPTURE_END: synthetic fixture requests; harness marker only",
+  "mdc" : { }
+} ]

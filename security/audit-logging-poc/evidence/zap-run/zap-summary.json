@@ -1,0 +1,63 @@
+{
+  "recordedAtUtc": "2026-09-26T13:23:08.379982+00:00",
+  "zapVersion": "2.17.0",
+  "proxy": "http://127.0.0.1:8080",
+  "history": [
+    {
+      "step": "01-create",
+      "historyId": "35",
+      "method": "POST",
+      "url": "http://127.0.0.1:51012/api/v1/orders",
+      "status": 201
+    },
+    {
+      "step": "02-before",
+      "historyId": "37",
+      "method": "GET",
+      "url": "http://127.0.0.1:51012/api/v1/orders/1",
+      "status": 200
+    },
+    {
+      "step": "03-confirm",
+      "historyId": "38",
+      "method": "PATCH",
+      "url": "http://127.0.0.1:51012/api/v1/orders/1/status",
+      "status": 200
+    },
+    {
+      "step": "04-rejected-transition",
+      "historyId": "39",
+      "method": "PATCH",
+      "url": "http://127.0.0.1:51012/api/v1/orders/1/status",
+      "status": 400
+    },
+    {
+      "step": "05-cancel",
+      "historyId": "40",
+      "method": "PATCH",
+      "url": "http://127.0.0.1:51012/api/v1/orders/1/status",
+      "status": 200
+    },
+    {
+      "step": "06-delete",
+      "historyId": "41",
+      "method": "DELETE",
+      "url": "http://127.0.0.1:51012/api/v1/orders/1",
+      "status": 204
+    },
+    {
+      "step": "07-after",
+      "historyId": "42",
+      "method": "GET",
+      "url": "http://127.0.0.1:51012/api/v1/orders/1",
+      "status": 404
+    }
+  ],
+  "requestCount": 7,
+  "applicationLogEvents": 0,
+  "captureControlEvents": 2,
+  "orderExistsAfterDeletion": false,
+  "method": "Actual original Order_Service requests through running ZAP Desktop proxy; API export, no GUI automation or screenshot creation. Synthetic fixture and disposable H2; no gateway.",
+  "interpretation": "All seven expected HTTP outcomes and actual deletion verified. Zero log events from the order application package were captured; source review also found no dedicated audit logger or audit entity for these paths. Framework logs and SQL output still exist.",
+  "limitations": "Bounded local observation, not proof that every deployment lacks external monitoring. The fixture userId is request data, not authenticated actor attribution. No logging fix has been implemented or tested."
+}
