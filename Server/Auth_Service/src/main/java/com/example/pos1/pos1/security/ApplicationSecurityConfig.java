@@ -35,15 +35,19 @@ public class ApplicationSecurityConfig extends WebSecurityConfiguration {
     private final JwtConfig jwtConfig;
     private final ApplicationUserRepo userRepository;
     private final LoginAttemptService loginAttemptService;
+    private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+    private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
 
     @Autowired
-    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserServiceImpl userService, SecretKey secretKey, JwtConfig jwtConfig, ApplicationUserRepo userRepository, LoginAttemptService loginAttemptService) {
+    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserServiceImpl userService, SecretKey secretKey, JwtConfig jwtConfig, ApplicationUserRepo userRepository, LoginAttemptService loginAttemptService, OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler, OAuth2LoginFailureHandler oAuth2LoginFailureHandler) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.secretKey = secretKey;
         this.jwtConfig = jwtConfig;
         this.userRepository = userRepository;
         this.loginAttemptService = loginAttemptService;
+        this.oAuth2LoginSuccessHandler = oAuth2LoginSuccessHandler;
+        this.oAuth2LoginFailureHandler = oAuth2LoginFailureHandler;
     }
 
     @Bean
@@ -59,8 +63,15 @@ public class ApplicationSecurityConfig extends WebSecurityConfiguration {
                         .requestMatchers("/api/v1/users/change-role").hasRole("ADMIN")
                         .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/v1/customers/visitor/**").permitAll()
+                        .requestMatchers("/oauth2/**", "/login/oauth2/**").permitAll()
                         .anyRequest().authenticated() // Authenticate all other requests
-                );
+                )
+                // "Login with Google": on success this issues the same kind of
+                // JWT the password login path issues (see OAuth2LoginSuccessHandler),
+                // so downstream services don't need to know which login method was used.
+                .oauth2Login(oauth2 -> oauth2
+                        .successHandler(oAuth2LoginSuccessHandler)
+                        .failureHandler(oAuth2LoginFailureHandler));
         return http.build();
     }
 

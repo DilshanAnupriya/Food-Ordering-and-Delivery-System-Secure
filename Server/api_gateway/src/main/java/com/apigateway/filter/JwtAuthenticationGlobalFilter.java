@@ -46,7 +46,12 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter, Ordered {
     // Public regardless of HTTP method (authentication endpoints).
     private static final List<String> PUBLIC_ANY = List.of(
             "/login",
-            "/api/v1/users/visitor"
+            "/api/v1/users/visitor",
+            // Google OAuth2/OIDC login handshake: the browser has no JWT yet
+            // when it starts (/oauth2/authorization/google) or completes
+            // (/login/oauth2/code/google) this flow.
+            "/oauth2/",
+            "/login/oauth2/"
     );
 
     // Public for GET only (anonymous browsing of the catalogue).

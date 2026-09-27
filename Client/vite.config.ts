@@ -9,13 +9,16 @@ export default defineConfig({
   // frontend so ZAP no longer flags missing CSP / anti-clickjacking on the
   // rendered pages. CSP is scoped to allow the app's own assets, the remote
   // restaurant logos, Google Fonts, and calls to the API gateway.
+  // The script-src hash allows only @vitejs/plugin-react's inline dev preamble
+  // (React Refresh); without it every page renders blank. If the plugin is
+  // upgraded and pages go blank, update the hash from the browser's CSP error.
   server: {
     headers: {
       'X-Content-Type-Options': 'nosniff',
       'X-Frame-Options': 'DENY',
       'Referrer-Policy': 'no-referrer',
       'Content-Security-Policy':
-        "default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self' http://localhost:8082",
+        "default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-NEZvGkT0ZWP6XHdKYM4B1laRPcM6Lw4LJfkDtIEVAKc='; connect-src 'self' http://localhost:8082",
     },
   },
 })

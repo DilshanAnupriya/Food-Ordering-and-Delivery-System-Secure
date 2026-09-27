@@ -27,6 +27,40 @@ interface AuthResponse {
 const API_URL = 'http://localhost:8082/';
 
 class AuthService {
+    // Shared by password login and the Google OAuth2 redirect handler: decodes
+    // the JWT, stores it, and derives+stores the display role the UI reads.
+    storeTokenAndResolveRole(token: string): any {
+        localStorage.setItem('token', token);
+
+        const decodedToken = jwtDecode<any>(token);
+
+        if (decodedToken.authorities && Array.isArray(decodedToken.authorities) && decodedToken.authorities.length > 0) {
+            const rolePriority = [
+                'ROLE_ADMIN',
+                'ROLE_RESTAURANT_OWNER',
+                'ROLE_DELIVERY',
+                'ROLE_USER'
+            ];
+
+            for (const roleToCheck of rolePriority) {
+                const hasRole = decodedToken.authorities.some(
+                    (auth: { authority: string }) => auth.authority === roleToCheck
+                );
+
+                if (hasRole) {
+                    localStorage.setItem('userRole', roleToCheck);
+                    break;
+                }
+            }
+        } else if (decodedToken.role) {
+            localStorage.setItem('userRole', decodedToken.role);
+        } else if (decodedToken.userId) {
+            localStorage.setItem('userRole', 'ROLE_USER');
+        }
+
+        return decodedToken;
+    }
+
     async login(credentials: LoginCredentials): Promise<AuthResponse> {
         try {
             // Make a SINGLE API request to the login endpoint.
