@@ -13,7 +13,16 @@ const Login = () => {
         username: '',
         password: ''
     });
-    const [error, setError] = useState('');
+    // Auth_Service's OAuth2LoginFailureHandler sends failed/cancelled Google logins
+    // back here as ?oauthError=<code>. Read it during render (not in an effect) so
+    // StrictMode's dev remount can't drop the message.
+    const [error, setError] = useState(() => {
+        const oauthError = new URLSearchParams(window.location.search).get('oauthError');
+        if (!oauthError) return '';
+        return oauthError === 'access_denied'
+            ? 'Google sign-in was cancelled.'
+            : "Google sign-in didn't complete. Please try again.";
+    });
     const [isLoading, setIsLoading] = useState(false);
     const [focusedField, setFocusedField] = useState(null);
 
@@ -26,6 +35,13 @@ const Login = () => {
 
             // Redirect based on user role
             redirectBasedOnRole(userRole);
+        }
+    }, [navigate]);
+
+    // Drop ?oauthError from the address bar so a refresh doesn't re-show it.
+    useEffect(() => {
+        if (new URLSearchParams(window.location.search).has('oauthError')) {
+            navigate('/login', { replace: true });
         }
     }, [navigate]);
 
@@ -60,6 +76,12 @@ const Login = () => {
                 navigate('/'); // Regular users go to home page
                 break;
         }
+    };
+
+    // Full-page redirect (not an XHR) into Spring Security's OAuth2 authorization
+    // endpoint on the gateway; Google redirects back to /oauth2/redirect with a token.
+    const handleGoogleLogin = () => {
+        window.location.href = 'http://localhost:8082/oauth2/authorization/google';
     };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -231,6 +253,35 @@ const Login = () => {
                             )}
                         </button>
                     </form>
+
+                    <div className="mt-6">
+                        <div className="relative">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t border-gray-300"></div>
+                            </div>
+                            <div className="relative flex justify-center text-sm">
+                                <span className="px-2 bg-white text-gray-500">
+                                    Or continue with
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="mt-6">
+                            <button
+                                type="button"
+                                onClick={handleGoogleLogin}
+                                className="w-full flex items-center justify-center gap-2 py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-300"
+                            >
+                                <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 01-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.88 2.7-6.62z"/>
+                                    <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.96v2.33A9 9 0 009 18z"/>
+                                    <path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 013.68 9c0-.59.1-1.17.27-1.7V4.97H.96A9 9 0 000 9c0 1.45.35 2.83.96 4.03l2.99-2.33z"/>
+                                    <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 00.96 4.97l2.99 2.33C4.66 5.17 6.65 3.58 9 3.58z"/>
+                                </svg>
+                                Continue with Google
+                            </button>
+                        </div>
+                    </div>
 
                     <div className="mt-6">
                         <div className="relative">

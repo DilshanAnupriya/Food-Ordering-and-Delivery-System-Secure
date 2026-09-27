@@ -121,7 +121,10 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 
     @Override
         public void initializeAdmin() throws IOException {
-            Optional<ApplicationUser> selectedUser = userRepo.findByUsername("dilshananupriya.info@gmail.com");
+            // Fix V4: admin credentials are supplied from the environment, never hard-coded.
+            String adminEmail = System.getenv().getOrDefault("ADMIN_EMAIL", "admin@local.dev");
+            String adminPassword = System.getenv().getOrDefault("ADMIN_PASSWORD", "ChangeMe!" + UUID.randomUUID());
+            Optional<ApplicationUser> selectedUser = userRepo.findByUsername(adminEmail);
             if (selectedUser.isPresent()) {
                 return;
             }
@@ -137,8 +140,8 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
             userRepo.save(
                     ApplicationUser.builder()
                             .userId(UUID.randomUUID().toString())
-                            .username("dilshananupriya.info@gmail.com")
-                            .password(passwordEncoder.encode("dilshan@2002")) // must be encrypted //
+                            .username(adminEmail)
+                            .password(passwordEncoder.encode(adminPassword)) // from environment
                             .fullName("dilshan anupriya")
                             .roles(selectedRoles)
                             .isAccountNonExpired(true)

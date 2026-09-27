@@ -4,6 +4,7 @@ import Home from './pages/Home';
 
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
+import OAuthRedirect from './pages/Auth/OAuthRedirect';
 import { AuthProvider } from './services/auth/authContext';
 import Restaurants from './pages/Restaurant/Restaurants';
 import Restaurant from './pages/Restaurant/Restaurant';
@@ -61,6 +62,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/oauth2/redirect" element={<OAuthRedirect />} />
 
                     <Route element={<ProtectedRoute />}>
                         <Route path="/contact" element={<ContactUs />} />

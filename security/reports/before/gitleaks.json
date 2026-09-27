@@ -1,0 +1,23 @@
+[
+ {
+  "RuleID": "stripe-access-token",
+  "Description": "Found a Stripe Access Token, posing a risk to payment processing services and sensitive financial data.",
+  "StartLine": 2,
+  "EndLine": 2,
+  "StartColumn": 19,
+  "EndColumn": 125,
+  "Match": "sk_test_51RDK3f05Jvg5zM6NQlWRPOhRHsJSUVUgZ4Nii5ZtjfgKHgqK04ASXJvjnTsoNba9UVFIKxlrh1g5QgjHJwe2YYHa00i2pKL5EA",
+  "Secret": "sk_test_51RDK3f05Jvg5zM6NQlWRPOhRHsJSUVUgZ4Nii5ZtjfgKHgqK04ASXJvjnTsoNba9UVFIKxlrh1g5QgjHJwe2YYHa00i2pKL5EA",
+  "File": "Server/Payment_Service/src/main/resources/application.properties",
+  "SymlinkFile": "",
+  "Commit": "7b0273b400615a0adb71554a6d6dd811216d5650",
+  "Link": "https://github.com/DilshanAnupriya/Food-Ordering-and-Delivery-System-Secure/blob/7b0273b400615a0adb71554a6d6dd811216d5650/Server/Payment_Service/src/main/resources/application.properties#L2",
+  "Entropy": 5.4783034,
+  "Author": "Dilshan",
+  "Email": "dilshananupriya@icloud.com",
+  "Date": "2026-09-18T04:53:49Z",
+  "Message": "project clone from original repo",
+  "Tags": [],
+  "Fingerprint": "7b0273b400615a0adb71554a6d6dd811216d5650:Server/Payment_Service/src/main/resources/application.properties:stripe-access-token:2"
+ }
+]
