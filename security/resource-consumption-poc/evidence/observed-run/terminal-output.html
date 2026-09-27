@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Recorded PoC terminal output</title>
+<style>
+* { box-sizing: border-box; }
+html,body { margin: 0; background: #10151e; color: #e8edf4; }
+body { width: 1440px; font-family: Menlo, Consolas, monospace; }
+header { padding: 22px 34px; background: #1b2330; border-bottom: 1px solid #364151; font-family: Arial, sans-serif; }
+h1 { margin: 0; font-size: 22px; font-weight: 600; }
+header p { color: #b9c4d2; font-size: 14px; margin: 8px 0 0; }
+pre { margin: 0; padding: 30px 34px 26px; font-size: 17px; line-height: 1.85; white-space: pre-wrap; overflow-wrap: anywhere; }
+footer { padding: 0 34px 24px; font-size: 13px; color: #b9c4d2; }
+</style></head><body>
+<header><h1>PoC terminal output</h1><p>Rendered excerpt of the actual saved Maven execution logs</p></header>
+<pre>$ bash security/resource-consumption-poc/show-results.sh
+
+Recorded PoC execution output — 26 September 2026
+
+POC PAGINATION: size=10 -&gt; 10 orders (4791 bytes); size=200 -&gt; 200 orders (94460 bytes).
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.429 s -- in local.security.ResourceConsumptionPocTest
+[INFO] BUILD SUCCESS
+[INFO] Finished at: 2026-09-26T14:50:12+05:30
+
+POC NOTIFICATIONS: 6 identical POSTs in 5209 ms -&gt; 6 HTTP 200 responses, 6 captured emails, 0 HTTP 429 responses.
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.795 s -- in local.security.ResourceConsumptionPocTest
+[INFO] BUILD SUCCESS
+[INFO] Finished at: 2026-09-26T14:50:58+05:30</pre>
+<footer>Source: evidence/observed-run/pagination-run.log and notifications-run.log</footer>
+</body></html>

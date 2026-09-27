@@ -1,0 +1,142 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< local.security:resource-consumption-poc >---------------
+[INFO] Building resource-consumption-poc 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ resource-consumption-poc ---
+[INFO] skip non existing resourceDirectory /Users/vidurahewaduwa/Documents/GitHub/Food-Ordering-and-Delivery-System-Secure/security/resource-consumption-poc/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ resource-consumption-poc ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 71 source files with javac [debug parameters release 17] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ resource-consumption-poc ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ resource-consumption-poc ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ resource-consumption-poc ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[WARNING] System property [poc.evidence] overwritten by user properties from Maven session
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running local.security.RestaurantPaginationFixTest
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/Users/vidurahewaduwa/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+WARN org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.843 s -- in local.security.RestaurantPaginationFixTest
+[INFO] Running local.security.ResourceConsumptionFixTest
+WARN org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+POC PAGINATION: size=10 -> 10 orders (4787 bytes); size=200 -> 0 orders (42 bytes).
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.629 s -- in local.security.ResourceConsumptionFixTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.714 s
+[INFO] Finished at: 2026-09-26T19:27:09+05:30
+[INFO] ------------------------------------------------------------------------
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< local.security:resource-consumption-poc >---------------
+[INFO] Building resource-consumption-poc 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ resource-consumption-poc ---
+[INFO] skip non existing resourceDirectory /Users/vidurahewaduwa/Documents/GitHub/Food-Ordering-and-Delivery-System-Secure/security/resource-consumption-poc/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ resource-consumption-poc ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 71 source files with javac [debug parameters release 17] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ resource-consumption-poc ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ resource-consumption-poc ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ resource-consumption-poc ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[WARNING] System property [poc.evidence] overwritten by user properties from Maven session
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running local.security.NotificationProtectionTest
+WARN org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+WARN org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+WARN org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+WARN o.h.e.j.spi.SqlExceptionHelper - SQL Error: 23505, SQLState: 23505
+WARN o.h.e.j.spi.SqlExceptionHelper - SQL Error: 23505, SQLState: 23505
+ERROR o.h.e.j.spi.SqlExceptionHelper - Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5 ON PUBLIC.NOTIFICATION_DELIVERY(EVENT_KEY NULLS FIRST) VALUES ( /* 2 */ '914371b3d3de7ba2eb5acdbbfb7acaa53fe195dc1f5efd8c5da7bc5b5d28b094' )"; SQL statement:
+insert into notification_delivery (created_at,event_key,status,id) values (?,?,?,default) [23505-232]
+ERROR o.h.e.j.spi.SqlExceptionHelper - Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5 ON PUBLIC.NOTIFICATION_DELIVERY(EVENT_KEY NULLS FIRST) VALUES ( /* 2 */ '914371b3d3de7ba2eb5acdbbfb7acaa53fe195dc1f5efd8c5da7bc5b5d28b094' )"; SQL statement:
+insert into notification_delivery (created_at,event_key,status,id) values (?,?,?,default) [23505-232]
+WARN o.h.e.j.spi.SqlExceptionHelper - SQL Error: 23505, SQLState: 23505
+ERROR o.h.e.j.spi.SqlExceptionHelper - Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5 ON PUBLIC.NOTIFICATION_DELIVERY(EVENT_KEY NULLS FIRST) VALUES ( /* 2 */ '914371b3d3de7ba2eb5acdbbfb7acaa53fe195dc1f5efd8c5da7bc5b5d28b094' )"; SQL statement:
+insert into notification_delivery (created_at,event_key,status,id) values (?,?,?,default) [23505-232]
+WARN o.h.e.j.spi.SqlExceptionHelper - SQL Error: 23505, SQLState: 23505
+ERROR o.h.e.j.spi.SqlExceptionHelper - Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5 ON PUBLIC.NOTIFICATION_DELIVERY(EVENT_KEY NULLS FIRST) VALUES ( /* 2 */ '914371b3d3de7ba2eb5acdbbfb7acaa53fe195dc1f5efd8c5da7bc5b5d28b094' )"; SQL statement:
+insert into notification_delivery (created_at,event_key,status,id) values (?,?,?,default) [23505-232]
+WARN o.h.e.j.spi.SqlExceptionHelper - SQL Error: 23505, SQLState: 23505
+ERROR o.h.e.j.spi.SqlExceptionHelper - Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5 ON PUBLIC.NOTIFICATION_DELIVERY(EVENT_KEY NULLS FIRST) VALUES ( /* 2 */ '914371b3d3de7ba2eb5acdbbfb7acaa53fe195dc1f5efd8c5da7bc5b5d28b094' )"; SQL statement:
+insert into notification_delivery (created_at,event_key,status,id) values (?,?,?,default) [23505-232]
+WARN o.h.e.j.spi.SqlExceptionHelper - SQL Error: 23505, SQLState: 23505
+ERROR o.h.e.j.spi.SqlExceptionHelper - Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5 ON PUBLIC.NOTIFICATION_DELIVERY(EVENT_KEY NULLS FIRST) VALUES ( /* 2 */ '914371b3d3de7ba2eb5acdbbfb7acaa53fe195dc1f5efd8c5da7bc5b5d28b094' )"; SQL statement:
+insert into notification_delivery (created_at,event_key,status,id) values (?,?,?,default) [23505-232]
+WARN o.h.e.j.spi.SqlExceptionHelper - SQL Error: 23505, SQLState: 23505
+ERROR o.h.e.j.spi.SqlExceptionHelper - Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5 ON PUBLIC.NOTIFICATION_DELIVERY(EVENT_KEY NULLS FIRST) VALUES ( /* 2 */ '914371b3d3de7ba2eb5acdbbfb7acaa53fe195dc1f5efd8c5da7bc5b5d28b094' )"; SQL statement:
+insert into notification_delivery (created_at,event_key,status,id) values (?,?,?,default) [23505-232]
+WARN org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+WARN org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+WARN o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.example.Notification.controller.NotificationController.sendPaymentConfirmation(com.example.Notification.dto.PaymentConfirmationRequest,jakarta.servlet.http.HttpServletRequest) with 2 errors: [Field error in object 'paymentConfirmationRequest' on field 'orderId': rejected value []; codes [Pattern.paymentConfirmationRequest.orderId,Pattern.orderId,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [paymentConfirmationRequest.orderId,orderId]; arguments []; default message [orderId],[Ljakarta.validation.constraints.Pattern$Flag;@7ffea3be,[A-Za-z0-9][A-Za-z0-9._:-]{0,127}]; default message [must match "[A-Za-z0-9][A-Za-z0-9._:-]{0,127}"]] [Field error in object 'paymentConfirmationRequest' on field 'orderId': rejected value []; codes [NotBlank.paymentConfirmationRequest.orderId,NotBlank.orderId,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [paymentConfirmationRequest.orderId,orderId]; arguments []; default message [orderId]]; default message [must not be blank]] ]
+WARN o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.example.Notification.controller.NotificationController.sendPaymentConfirmation(com.example.Notification.dto.PaymentConfirmationRequest,jakarta.servlet.http.HttpServletRequest): [Field error in object 'paymentConfirmationRequest' on field 'amount': rejected value [-1.0]; codes [PositiveOrZero.paymentConfirmationRequest.amount,PositiveOrZero.amount,PositiveOrZero.double,PositiveOrZero]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [paymentConfirmationRequest.amount,amount]; arguments []; default message [amount]]; default message [must be greater than or equal to 0]] ]
+WARN o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.example.Notification.controller.NotificationController.sendPaymentConfirmation(com.example.Notification.dto.PaymentConfirmationRequest,jakarta.servlet.http.HttpServletRequest): [Field error in object 'paymentConfirmationRequest' on field 'paymentStatus': rejected value [ARBITRARY]; codes [Pattern.paymentConfirmationRequest.paymentStatus,Pattern.paymentStatus,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [paymentConfirmationRequest.paymentStatus,paymentStatus]; arguments []; default message [paymentStatus],[Ljakarta.validation.constraints.Pattern$Flag;@7ffea3be,SUCCESS|PAID|FAILED|PENDING]; default message [must match "SUCCESS|PAID|FAILED|PENDING"]] ]
+WARN o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.example.Notification.controller.NotificationController.sendPaymentConfirmation(com.example.Notification.dto.PaymentConfirmationRequest,jakarta.servlet.http.HttpServletRequest): [Field error in object 'paymentConfirmationRequest' on field 'email': rejected value [invalid]; codes [Email.paymentConfirmationRequest.email,Email.email,Email.java.lang.String,Email]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [paymentConfirmationRequest.email,email]; arguments []; default message [email],[Ljakarta.validation.constraints.Pattern$Flag;@3989ae0e,.*]; default message [must be a well-formed email address]] ]
+WARN o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.example.Notification.controller.NotificationController.sendRestaurantConfirmation(com.example.Notification.dto.RestaurantConfirmationRequest,jakarta.servlet.http.HttpServletRequest): [Field error in object 'restaurantConfirmationRequest' on field 'restaurantId': rejected value [null]; codes [NotBlank.restaurantConfirmationRequest.restaurantId,NotBlank.restaurantId,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [restaurantConfirmationRequest.restaurantId,restaurantId]; arguments []; default message [restaurantId]]; default message [must not be blank]] ]
+WARN org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+WARN org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.801 s -- in local.security.NotificationProtectionTest
+[INFO] Running local.security.NotificationRateLimiterTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in local.security.NotificationRateLimiterTest
+[INFO] Running local.security.ResourceConsumptionFixTest
+WARN org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+POC NOTIFICATIONS: 6 identical POSTs in 24 ms -> 5 HTTP 200 responses, 1 captured emails, 1 HTTP 429 response.
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.163 s -- in local.security.ResourceConsumptionFixTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  12.118 s
+[INFO] Finished at: 2026-09-26T19:27:22+05:30
+[INFO] ------------------------------------------------------------------------

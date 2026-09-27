@@ -1,0 +1,43 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< local.security:audit-logging-fix >------------------
+[INFO] Building audit-logging-fix 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ audit-logging-fix ---
+[INFO] skip non existing resourceDirectory /Users/vidurahewaduwa/Documents/GitHub/Food-Ordering-and-Delivery-System-Secure/security/audit-logging-poc/fixed/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/vidurahewaduwa/Documents/GitHub/Food-Ordering-and-Delivery-System-Secure/security/audit-logging-poc/fixed/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ audit-logging-fix ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ audit-logging-fix ---
+[INFO] skip non existing resourceDirectory /Users/vidurahewaduwa/Documents/GitHub/Food-Ordering-and-Delivery-System-Secure/security/audit-logging-poc/fixed/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ audit-logging-fix ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ audit-logging-fix ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running local.security.AuditLoggingFixTest
+2026-09-26T19:26:43.962+05:30  WARN 74219 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 23513, SQLState: 23513
+2026-09-26T19:26:43.964+05:30 ERROR 74219 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : Check constraint violation: "REJECT_STATUS_AUDIT: "; SQL statement:
+insert into security_audit_events (action,actor_id,http_status,identity_source,new_status,occurred_at,order_id,outcome,previous_status,reason_code,request_id,event_id) values (?,?,?,?,?,?,?,?,?,?,?,?) [23513-232]
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.038 s -- in local.security.AuditLoggingFixTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.967 s
+[INFO] Finished at: 2026-09-26T19:26:45+05:30
+[INFO] ------------------------------------------------------------------------

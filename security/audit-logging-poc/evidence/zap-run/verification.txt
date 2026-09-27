@@ -1,0 +1,17 @@
+OBSERVED BEFORE-FIX AUDIT-LOGGING POC — 2026-09-26T13:23:08.379982+00:00
+ZAP Desktop 2.17.0; original source fe9136d015079d44d70707cc493ef1a88b53ee58
+
+History 35: POST http://127.0.0.1:51012/api/v1/orders -> HTTP 201
+History 37: GET http://127.0.0.1:51012/api/v1/orders/1 -> HTTP 200
+History 38: PATCH http://127.0.0.1:51012/api/v1/orders/1/status -> HTTP 200
+History 39: PATCH http://127.0.0.1:51012/api/v1/orders/1/status -> HTTP 400
+History 40: PATCH http://127.0.0.1:51012/api/v1/orders/1/status -> HTTP 200
+History 41: DELETE http://127.0.0.1:51012/api/v1/orders/1 -> HTTP 204
+History 42: GET http://127.0.0.1:51012/api/v1/orders/1 -> HTTP 404
+
+Order exists after deletion: False
+Logging capture control events: 2
+Order application package log events: 0
+SQL logging: enabled; framework/SQL output is present.
+PoC test: 1 passed (passing reproduces the original weakness; no fix tested).
+Evidence scope: local Order_Service, synthetic order, H2 database; no gateway.

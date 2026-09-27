@@ -5,6 +5,8 @@ import com.OrderManagement.OrderManagement.model.OrderModel;
 import com.OrderManagement.OrderManagement.model.OrderStatus;
 import com.OrderManagement.OrderManagement.service.OrderService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,11 +27,15 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    // ORIGINAL parameters (kept for the assignment's before/after comparison):
+    // @RequestParam(defaultValue = "0") int page,
+    // @RequestParam(defaultValue = "10") int size,
+    // FIX: reject negative pages and sizes outside 1..100 before building a query.
     // Get all orders with pagination
     @GetMapping
     public ResponseEntity<Map<String, Object>> getAllOrders(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "0") @Min(0) int page,
+            @RequestParam(defaultValue = "10") @Min(1) @Max(OrderService.MAX_PAGE_SIZE) int size,
             @RequestParam(defaultValue = "orderDate") String sortBy,
             @RequestParam(defaultValue = "desc") String direction) {
 
@@ -93,18 +99,25 @@ public class OrderController {
                                                         @RequestBody Map<String, String> statusRequest,
                                                         @RequestHeader(value = "X-Auth-User-Id", required = false) String callerUserId,
                                                         @RequestHeader(value = "X-Auth-Roles", required = false) String callerRoles) {
-        if (!statusRequest.containsKey("status")) {
-            return ResponseEntity.badRequest().build();
+        // ORIGINAL: if (!statusRequest.containsKey("status")) {
+        // AUDIT FIX: null/blank values must also reach the audited exception handler.
+        if (statusRequest.get("status") == null || statusRequest.get("status").isBlank()) {
+            // ORIGINAL: return ResponseEntity.badRequest().build();
+            throw new OrderException("Status is required", HttpStatus.BAD_REQUEST);
         }
 
         assertCanModify(orderId, callerUserId, callerRoles);
 
         try {
-            OrderStatus status = OrderStatus.valueOf(statusRequest.get("status").toUpperCase());
+            // ORIGINAL: OrderStatus status = OrderStatus.valueOf(statusRequest.get("status").toUpperCase());
+            // AUDIT FIX: parse consistently regardless of the server locale.
+            OrderStatus status = OrderStatus.valueOf(statusRequest.get("status").toUpperCase(java.util.Locale.ROOT));
             OrderModel updatedOrder = orderService.updateOrderStatus(orderId, status);
             return ResponseEntity.ok(updatedOrder);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            // ORIGINAL: return ResponseEntity.badRequest().build();
+            // AUDIT FIX: retain HTTP 400 and record invalid enum values through the common handler.
+            throw new OrderException("Invalid order status", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -126,6 +139,7 @@ public class OrderController {
         orderService.deleteOrder(orderId);
         return ResponseEntity.noContent().build();
     }
+
 
     /**
      * Object-level authorization guard for order modifications
@@ -165,3 +179,4 @@ public class OrderController {
         }
     }
 }
+

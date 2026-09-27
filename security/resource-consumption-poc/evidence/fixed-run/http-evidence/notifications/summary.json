@@ -1,0 +1,77 @@
+{
+  "finding" : "Repeated notification requests",
+  "recordedAtUtc" : "2026-09-26T11:48:52.587157Z",
+  "springBootVersion" : "3.4.5",
+  "javaVersion" : "21.0.9",
+  "httpHost" : "127.0.0.1",
+  "httpPort" : 49816,
+  "requestCount" : 6,
+  "durationMs" : 25,
+  "responses" : [ {
+    "requestNumber" : 1,
+    "status" : 200,
+    "headers" : {
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:48:52 GMT" ],
+      "transfer-encoding" : [ "chunked" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"deliveryStatus\":\"SENT\"}"
+  }, {
+    "requestNumber" : 2,
+    "status" : 200,
+    "headers" : {
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:48:52 GMT" ],
+      "transfer-encoding" : [ "chunked" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"deliveryStatus\":\"ALREADY_SENT\"}"
+  }, {
+    "requestNumber" : 3,
+    "status" : 200,
+    "headers" : {
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:48:52 GMT" ],
+      "transfer-encoding" : [ "chunked" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"deliveryStatus\":\"ALREADY_SENT\"}"
+  }, {
+    "requestNumber" : 4,
+    "status" : 200,
+    "headers" : {
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:48:52 GMT" ],
+      "transfer-encoding" : [ "chunked" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"deliveryStatus\":\"ALREADY_SENT\"}"
+  }, {
+    "requestNumber" : 5,
+    "status" : 200,
+    "headers" : {
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:48:52 GMT" ],
+      "transfer-encoding" : [ "chunked" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"deliveryStatus\":\"ALREADY_SENT\"}"
+  }, {
+    "requestNumber" : 6,
+    "status" : 429,
+    "headers" : {
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:48:52 GMT" ],
+      "retry-after" : [ "60" ],
+      "transfer-encoding" : [ "chunked" ],
+      "vary" : [ "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers" ]
+    },
+    "body" : "{\"message\":\"Notification request limit exceeded. Retry later.\",\"error\":\"RATE_LIMIT_EXCEEDED\"}"
+  } ],
+  "capturedEmails" : 1,
+  "smtpHost" : "127.0.0.1",
+  "smtpPort" : 49815,
+  "scope" : "Direct service HTTP and actual JavaMailSender delivery to local GreenMail; no real SMTP provider.",
+  "limitation" : "Confirms duplicate suppression and the configured five-request quota; uses local GreenMail and isolated H2 only."
+}

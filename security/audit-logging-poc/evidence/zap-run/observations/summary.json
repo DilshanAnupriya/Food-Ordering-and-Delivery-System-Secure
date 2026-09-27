@@ -1,0 +1,74 @@
+{
+  "finding" : "Missing application security audit trail for order changes and deletion",
+  "startedAtUtc" : "2026-09-26T13:22:05.805359Z",
+  "endedAtUtc" : "2026-09-26T13:22:06.319721Z",
+  "springBootVersion" : "3.4.3",
+  "javaVersion" : "21.0.9",
+  "baseUrl" : "http://127.0.0.1:51012",
+  "zapProxy" : "http://127.0.0.1:8080",
+  "orderId" : 1,
+  "requestCount" : 7,
+  "requests" : [ {
+    "step" : "01-create",
+    "method" : "POST",
+    "url" : "http://127.0.0.1:51012/api/v1/orders",
+    "requestId" : "AUDIT-POC-01-create",
+    "status" : 201,
+    "body" : "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"PLACED\",\"orderDate\":\"2026-09-26T18:52:05.893751\",\"lastUpdated\":\"2026-09-26T18:52:05.893769\",\"deliveryAddress\":\"Local audit test fixture\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10,\"deliveryFee\":1,\"tax\":1,\"totalAmount\":12,\"orderItems\":[{\"id\":1,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10,\"totalPrice\":10}]}"
+  }, {
+    "step" : "02-before",
+    "method" : "GET",
+    "url" : "http://127.0.0.1:51012/api/v1/orders/1",
+    "requestId" : "AUDIT-POC-02-before",
+    "status" : 200,
+    "body" : "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"PLACED\",\"orderDate\":\"2026-09-26T18:52:05.893751\",\"lastUpdated\":\"2026-09-26T18:52:05.893769\",\"deliveryAddress\":\"Local audit test fixture\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10.00,\"deliveryFee\":1.00,\"tax\":1.00,\"totalAmount\":12.00,\"orderItems\":[{\"id\":1,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10.00,\"totalPrice\":10.00}]}"
+  }, {
+    "step" : "03-confirm",
+    "method" : "PATCH",
+    "url" : "http://127.0.0.1:51012/api/v1/orders/1/status",
+    "requestId" : "AUDIT-POC-03-confirm",
+    "status" : 200,
+    "body" : "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"CONFIRMED\",\"orderDate\":\"2026-09-26T18:52:05.893751\",\"lastUpdated\":\"2026-09-26T18:52:05.994445\",\"deliveryAddress\":\"Local audit test fixture\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10.00,\"deliveryFee\":1.00,\"tax\":1.00,\"totalAmount\":12.00,\"orderItems\":[{\"id\":1,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10.00,\"totalPrice\":10.00}]}"
+  }, {
+    "step" : "04-rejected-transition",
+    "method" : "PATCH",
+    "url" : "http://127.0.0.1:51012/api/v1/orders/1/status",
+    "requestId" : "AUDIT-POC-04-rejected-transition",
+    "status" : 400,
+    "body" : "{\"message\":\"Order in CONFIRMED status can only transition to PREPARING or CANCELLED\",\"status\":400}"
+  }, {
+    "step" : "05-cancel",
+    "method" : "PATCH",
+    "url" : "http://127.0.0.1:51012/api/v1/orders/1/status",
+    "requestId" : "AUDIT-POC-05-cancel",
+    "status" : 200,
+    "body" : "{\"orderId\":1,\"userId\":\"POC-AUDIT-OWNER\",\"restaurantId\":\"POC-AUDIT-RESTAURANT\",\"status\":\"CANCELLED\",\"orderDate\":\"2026-09-26T18:52:05.893751\",\"lastUpdated\":\"2026-09-26T18:52:06.022918\",\"deliveryAddress\":\"Local audit test fixture\",\"latitude\":null,\"longitude\":null,\"contactPhone\":\"0000000000\",\"subtotal\":10.00,\"deliveryFee\":1.00,\"tax\":1.00,\"totalAmount\":12.00,\"orderItems\":[{\"id\":1,\"menuItemId\":\"POC-MENU-001\",\"itemName\":\"Audit test meal\",\"quantity\":1,\"unitPrice\":10.00,\"totalPrice\":10.00}]}"
+  }, {
+    "step" : "06-delete",
+    "method" : "DELETE",
+    "url" : "http://127.0.0.1:51012/api/v1/orders/1",
+    "requestId" : "AUDIT-POC-06-delete",
+    "status" : 204,
+    "body" : ""
+  }, {
+    "step" : "07-after",
+    "method" : "GET",
+    "url" : "http://127.0.0.1:51012/api/v1/orders/1",
+    "requestId" : "AUDIT-POC-07-after",
+    "status" : 404,
+    "body" : "{\"message\":\"Order not found with ID: 1\",\"status\":404}"
+  } ],
+  "orderExistsAfterDeletion" : false,
+  "loggingCaptureControlEvents" : 2,
+  "capturedLogbackEvents" : 5,
+  "orderPackageLogEvents" : 0,
+  "loggingLevels" : {
+    "org.springframework.web" : "INFO",
+    "root" : "INFO",
+    "com.OrderManagement" : "DEBUG"
+  },
+  "sqlLoggingEnabled" : true,
+  "scope" : "Actual original Order_Service HTTP/controller/service/repository. Disposable H2 replaces MySQL; direct loopback service through ZAP; no gateway or real user data.",
+  "interpretation" : "All seven expected HTTP outcomes and actual deletion verified. Zero log events from the order application package were captured; source review also found no dedicated audit logger or audit entity for these paths. Framework logs and SQL output still exist.",
+  "limitations" : "Bounded local observation, not proof that every deployment lacks external monitoring. The fixture userId is request data, not authenticated actor attribution. No logging fix has been implemented or tested."
+}

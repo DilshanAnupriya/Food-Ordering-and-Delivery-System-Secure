@@ -1,0 +1,9 @@
+POST http://127.0.0.1:51012/api/v1/orders HTTP/1.1
+X-Request-ID: AUDIT-POC-01-create
+Content-Type: application/json
+
+{"userId":"POC-AUDIT-OWNER","restaurantId":"POC-AUDIT-RESTAURANT",
+ "deliveryAddress":"Local audit test fixture","contactPhone":"0000000000",
+ "deliveryFee":1,"tax":1,
+ "orderItems":[{"menuItemId":"POC-MENU-001","itemName":"Audit test meal",
+ "quantity":1,"unitPrice":10,"totalPrice":10}]}

@@ -1,0 +1,4 @@
+HTTP 400
+{connection=[close], content-length=[42], content-type=[application/json], date=[Sat, 26 Sep 2026 13:56:44 GMT], x-request-id=[52686e44-3aba-48f9-8b24-a9c08c1f6c84]}
+
+{"message":"Invalid request","status":400}
