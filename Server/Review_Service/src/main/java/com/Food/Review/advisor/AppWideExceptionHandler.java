@@ -45,5 +45,18 @@ public class AppWideExceptionHandler {
                 HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(org.springframework.web.bind.MethodArgumentNotValidException.class)
+    public ResponseEntity<StandardResponseDto> handleValidationExceptions(
+            org.springframework.web.bind.MethodArgumentNotValidException ex) {
+        java.util.Map<String, String> errors = new java.util.HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+                errors.put(error.getField(), error.getDefaultMessage()));
+
+        return new ResponseEntity<>(
+                new StandardResponseDto(400, "Validation failed: " + errors, errors),
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
 
 }

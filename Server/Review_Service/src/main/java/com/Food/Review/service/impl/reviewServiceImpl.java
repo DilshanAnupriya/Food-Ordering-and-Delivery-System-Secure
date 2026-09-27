@@ -8,6 +8,8 @@ import com.Food.Review.exception.EntryNotFoundException;
 import com.Food.Review.repo.ReviewRepo;
 import com.Food.Review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Safelist;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +23,18 @@ public class reviewServiceImpl implements ReviewService {
 
     private final ReviewRepo reviewRepo;
 
+    private String sanitizeInput(String input) {
+        if (input == null) {
+            return null;
+        }
+        // Strips any HTML tags, Javascript, or event handlers (e.g. <script>, <img>, onerror)
+        return Jsoup.clean(input.trim(), Safelist.none());
+    }
+
     @Override
     public void createReview(ReviewRequestDto dto) {
+        dto.setCustomer_name(sanitizeInput(dto.getCustomer_name()));
+        dto.setReview_content(sanitizeInput(dto.getReview_content()));
         reviewRepo.save(toReview(dto));
     }
 
@@ -30,8 +42,8 @@ public class reviewServiceImpl implements ReviewService {
     public void updateReview(ReviewRequestDto dto,String id) {
         Reviews reviews = reviewRepo.findById(id).orElseThrow(()-> new EntryNotFoundException("not found"));
 
-        reviews.setCustomer_name(dto.getCustomer_name());
-        reviews.setReview_content(dto.getReview_content());
+        reviews.setCustomer_name(sanitizeInput(dto.getCustomer_name()));
+        reviews.setReview_content(sanitizeInput(dto.getReview_content()));
         reviews.setRating(dto.getRating());
         reviews.setUpdated_at(LocalDateTime.now());
 
@@ -68,9 +80,9 @@ public class reviewServiceImpl implements ReviewService {
         return Reviews.builder()
                 .review_id(UUID.randomUUID().toString())
                 .customer_id(dto.getCustomer_id())
-                .customer_name(dto.getCustomer_name())
+                .customer_name(sanitizeInput(dto.getCustomer_name()))
                 .restaurant_id(dto.getRestaurant_id())
-                .review_content(dto.getReview_content())
+                .review_content(sanitizeInput(dto.getReview_content()))
                 .rating(dto.getRating())
                 .created_at(LocalDateTime.now())
                 .updated_at(LocalDateTime.now())

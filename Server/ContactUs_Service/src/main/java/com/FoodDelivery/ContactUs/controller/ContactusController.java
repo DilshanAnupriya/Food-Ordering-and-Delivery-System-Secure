@@ -1,24 +1,21 @@
 package com.FoodDelivery.ContactUs.controller;
 
-
 import com.FoodDelivery.ContactUs.entity.Contactus;
 import com.FoodDelivery.ContactUs.service.ContactusService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-
 @RequestMapping("/api/v1/contactus")
-
 public class ContactusController {
     @Autowired
     ContactusService contactusService;
 
     @PostMapping("/create")
-    public Contactus createContactus(@RequestBody Contactus contactus) {
+    public Contactus createContactus(@Valid @RequestBody Contactus contactus) {
         return contactusService.createContactus(contactus);
     }
 
@@ -35,7 +32,7 @@ public class ContactusController {
     }
 
     @PutMapping("/update")
-    public Contactus UpdateContactus(@RequestBody Contactus contactus) {
+    public Contactus UpdateContactus(@Valid @RequestBody Contactus contactus) {
         return contactusService.createContactus(contactus);
     }
 
