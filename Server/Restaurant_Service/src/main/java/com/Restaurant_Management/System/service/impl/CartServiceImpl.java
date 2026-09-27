@@ -7,6 +7,7 @@ import com.Restaurant_Management.System.dto.response.CartResponseDto;
 import com.Restaurant_Management.System.entity.Cart;
 import com.Restaurant_Management.System.entity.CartItems;
 import com.Restaurant_Management.System.entity.FoodItem;
+import com.Restaurant_Management.System.exception.BadRequestException;
 import com.Restaurant_Management.System.exception.EntryNotFoundException;
 import com.Restaurant_Management.System.repo.CartRepo;
 import com.Restaurant_Management.System.repo.FoodItemRepo;
@@ -99,6 +100,10 @@ public class CartServiceImpl implements CartService {
     }
     @Override
     public void updateCartItemQuantity(String userId, String foodId, int quantity, boolean increase) {
+        if (quantity <= 0) {
+            throw new BadRequestException("Quantity must be strictly positive");
+        }
+
         Cart cart = cartRepo.findCartByUserId(userId)
                 .orElseThrow(() -> new EntryNotFoundException("Cart not found for user: " + userId));
 
@@ -154,6 +159,9 @@ public class CartServiceImpl implements CartService {
         double totalPrice = 0;
 
         for (FoodCartItemRequestDto cartDto : dto.getCartItems()) {
+            if (cartDto.getQuantity() <= 0) {
+                throw new BadRequestException("Item quantity must be strictly positive");
+            }
             FoodItem foodItem = foodItemRepo.findFoodItemByFoodItemId(cartDto.getFoodItemId())
                     .orElseThrow(() -> new EntryNotFoundException("Food item not found"));
 
@@ -188,6 +196,9 @@ public class CartServiceImpl implements CartService {
         double totalPrice = 0;
 
         for (FoodCartItemRequestDto cartDto : dto.getCartItems()) {
+            if (cartDto.getQuantity() <= 0) {
+                throw new BadRequestException("Item quantity must be strictly positive");
+            }
             FoodItem foodItem = foodItemRepo.findFoodItemByFoodItemId(cartDto.getFoodItemId())
                     .orElseThrow(() -> new EntryNotFoundException("Food item not found"));
 

@@ -71,28 +71,57 @@ public class OrderService {
     }
 
     private void calculateOrderTotals(OrderModel order) {
-        // Calculate subtotal from items
-        BigDecimal subtotal = order.getOrderItems().stream()
-                .map(OrderItem::getTotalPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        if (order.getOrderItems() == null || order.getOrderItems().isEmpty()) {
+            throw new OrderException("Order must contain at least one item", HttpStatus.BAD_REQUEST);
+        }
 
+        BigDecimal subtotal = BigDecimal.ZERO;
+
+        for (OrderItem item : order.getOrderItems()) {
+            if (item.getQuantity() == null || item.getQuantity() <= 0) {
+                throw new OrderException("Item quantity must be strictly greater than zero", HttpStatus.BAD_REQUEST);
+            }
+            if (item.getUnitPrice() == null || item.getUnitPrice().compareTo(BigDecimal.ZERO) <= 0) {
+                throw new OrderException("Item unit price must be strictly positive", HttpStatus.BAD_REQUEST);
+            }
+
+            // Enforce server-side calculation of line item price, ignoring any client totalPrice override
+            BigDecimal calculatedItemTotal = item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
+            item.setTotalPrice(calculatedItemTotal);
+            subtotal = subtotal.add(calculatedItemTotal);
+        }
+
+        // Validate client subtotal tampering if provided
+        if (order.getSubtotal() != null && order.getSubtotal().compareTo(subtotal) != 0) {
+            throw new OrderException("Price tampering detected: client subtotal does not match server calculation", HttpStatus.BAD_REQUEST);
+        }
         order.setSubtotal(subtotal);
 
-        // Ensure other values are present
+        // Ensure delivery fee is non-negative
         if (order.getDeliveryFee() == null) {
             order.setDeliveryFee(BigDecimal.ZERO);
+        } else if (order.getDeliveryFee().compareTo(BigDecimal.ZERO) < 0) {
+            throw new OrderException("Delivery fee cannot be negative", HttpStatus.BAD_REQUEST);
         }
 
+        // Ensure tax is non-negative
         if (order.getTax() == null) {
             order.setTax(BigDecimal.ZERO);
+        } else if (order.getTax().compareTo(BigDecimal.ZERO) < 0) {
+            throw new OrderException("Tax cannot be negative", HttpStatus.BAD_REQUEST);
         }
 
-        // Calculate total
-        BigDecimal total = subtotal
+        // Authoritative server total calculation
+        BigDecimal calculatedTotal = subtotal
                 .add(order.getDeliveryFee())
                 .add(order.getTax());
 
-        order.setTotalAmount(total);
+        // Validate client totalAmount tampering if provided
+        if (order.getTotalAmount() != null && order.getTotalAmount().compareTo(calculatedTotal) != 0) {
+            throw new OrderException("Price tampering detected: client total does not match server calculation", HttpStatus.BAD_REQUEST);
+        }
+
+        order.setTotalAmount(calculatedTotal);
     }
 
     private void validateOrder(OrderModel order) {
@@ -186,6 +215,16 @@ public class OrderService {
             List<OrderItem> updatedItems = new ArrayList<>();
 
             for (OrderItem updatedItem : updatedOrder.getOrderItems()) {
+                if (updatedItem.getQuantity() == null || updatedItem.getQuantity() <= 0) {
+                    throw new OrderException("Updated item quantity must be strictly greater than zero", HttpStatus.BAD_REQUEST);
+                }
+                if (updatedItem.getUnitPrice() == null || updatedItem.getUnitPrice().compareTo(BigDecimal.ZERO) <= 0) {
+                    throw new OrderException("Updated item unit price must be strictly positive", HttpStatus.BAD_REQUEST);
+                }
+
+                BigDecimal calculatedItemTotal = updatedItem.getUnitPrice().multiply(BigDecimal.valueOf(updatedItem.getQuantity()));
+                updatedItem.setTotalPrice(calculatedItemTotal);
+
                 if (updatedItem.getId() != null && existingItemsMap.containsKey(updatedItem.getId())) {
                     // Update existing item
                     OrderItem existingItem = existingItemsMap.get(updatedItem.getId());
@@ -193,7 +232,7 @@ public class OrderService {
                     existingItem.setItemName(updatedItem.getItemName());
                     existingItem.setQuantity(updatedItem.getQuantity());
                     existingItem.setUnitPrice(updatedItem.getUnitPrice());
-                    existingItem.setTotalPrice(updatedItem.getTotalPrice());
+                    existingItem.setTotalPrice(calculatedItemTotal);
                     updatedItems.add(existingItem);
                 } else {
                     // Add new item

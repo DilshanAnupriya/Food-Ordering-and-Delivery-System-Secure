@@ -25,6 +25,29 @@ public class StripeService {
     private String secretKey;
 
     public StripeResponse checkoutProducts(ProductRequest productRequest) {
+        if (productRequest == null) {
+            return StripeResponse.builder()
+                    .status("FAILED")
+                    .message("Product request cannot be null")
+                    .build();
+        }
+
+        // Enforce validation to prevent price/amount tampering
+        if (productRequest.getAmount() == null || productRequest.getAmount() <= 0) {
+            log.warn("Security Alert: Invalid or tampered payment amount rejected: {}", productRequest.getAmount());
+            return StripeResponse.builder()
+                    .status("FAILED")
+                    .message("Invalid payment amount: amount must be strictly greater than zero")
+                    .build();
+        }
+
+        if (productRequest.getOrderId() == null) {
+            return StripeResponse.builder()
+                    .status("FAILED")
+                    .message("Order ID cannot be null")
+                    .build();
+        }
+
         Stripe.apiKey = secretKey;
 
         try {

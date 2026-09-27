@@ -3,6 +3,7 @@ package com.payment.payment.controller;
 import com.payment.payment.dto.ProductRequest;
 import com.payment.payment.dto.StripeResponse;
 import com.payment.payment.service.StripeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class ProductCheckoutController {
     }
 
     @PostMapping("/checkout")
-    public ResponseEntity<StripeResponse> checkoutProducts(@RequestBody ProductRequest productRequest) {
+    public ResponseEntity<StripeResponse> checkoutProducts(@Valid @RequestBody ProductRequest productRequest) {
         StripeResponse stripeResponse = stripeService.checkoutProducts(productRequest);
         return ResponseEntity
                 .status(HttpStatus.OK)
