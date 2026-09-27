@@ -1,0 +1,5 @@
+PASS: 13 ZAP-proxied requests with expected responses.
+PASS: 11 audit records retained for deleted order (5 SUCCESS, 1 DENIED, 5 REJECTED).
+PASS: verified JWT actor attribution; spoofed headers/body without JWT labelled UNVERIFIED.
+PASS: 12 total audit records survive application restart; deleted order remains absent.
+PASS: audit records exclude tokens, addresses, phone numbers and signing secrets.

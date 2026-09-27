@@ -1,0 +1,5 @@
+PATCH http://127.0.0.1:51160/api/v1/orders/1/status
+X-Auth-User-Id: POC-AUDIT-OWNER
+Authorization: [synthetic test JWT redacted]
+
+{

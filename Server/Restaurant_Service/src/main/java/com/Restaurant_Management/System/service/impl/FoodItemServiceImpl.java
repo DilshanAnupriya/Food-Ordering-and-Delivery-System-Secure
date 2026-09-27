@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import com.Restaurant_Management.System.util.PaginationLimits;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -67,7 +68,19 @@ public class FoodItemServiceImpl implements FoodItemService {
     }
 
     @Override
+    // ORIGINAL implementation: queried food items with an unrestricted page size.
+    //     public FoodItemResponsePaginateDto findAllFoodItem(String searchText, int page, int size) {
+    //         return FoodItemResponsePaginateDto.builder()
+    //                 .dataCount(foodItemRepo.countAllFoodItems(searchText))
+    //                 .dataList(foodItemRepo.findAllFoodItem(searchText,PageRequest.of(page,size))
+    //                         .stream()
+    //                         .map(this::toFoodItemResponseDto)
+    //                         .collect(Collectors.toList()))
+    //                 .build();
+    //     }
+    // FIX: validate pagination before database queries or other side effects.
     public FoodItemResponsePaginateDto findAllFoodItem(String searchText, int page, int size) {
+        PaginationLimits.validate(page, size);
         return FoodItemResponsePaginateDto.builder()
                 .dataCount(foodItemRepo.countAllFoodItems(searchText))
                 .dataList(foodItemRepo.findAllFoodItem(searchText,PageRequest.of(page,size))
@@ -83,7 +96,27 @@ public class FoodItemServiceImpl implements FoodItemService {
     }
 
     @Override
+    // ORIGINAL implementation: queried categories with an unrestricted page size.
+    //     public FoodItemResponsePaginateDto getFoodItemByRestaurantAndCategory(String searchText, int page, int size, String restaurantId, String category) {
+    //         String categoryPattern = "%" + category + "%";
+    //         PageRequest pageRequest = PageRequest.of(page, size);
+    //
+    //         List<FoodItemResponseDto> foodItems = foodItemRepo
+    //                 .findFoodItemsByRestaurantIdAndCategory(restaurantId, categoryPattern, pageRequest)
+    //                 .stream()
+    //                 .map(this::toFoodItemResponseDto)
+    //                 .collect(Collectors.toList());
+    //
+    //         long count = foodItemRepo.countAllFoodItemsByRestaurantIdAndCategory(restaurantId, categoryPattern);
+    //
+    //         return FoodItemResponsePaginateDto.builder()
+    //                 .dataCount(count)
+    //                 .dataList(foodItems)
+    //                 .build();
+    //     }
+    // FIX: validate pagination before database queries or other side effects.
     public FoodItemResponsePaginateDto getFoodItemByRestaurantAndCategory(String searchText, int page, int size, String restaurantId, String category) {
+        PaginationLimits.validate(page, size);
         String categoryPattern = "%" + category + "%";
         PageRequest pageRequest = PageRequest.of(page, size);
 

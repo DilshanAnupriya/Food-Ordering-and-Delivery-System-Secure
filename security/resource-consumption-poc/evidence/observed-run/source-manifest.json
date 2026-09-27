@@ -1,0 +1,24 @@
+{
+  "originalCommit": "fe9136d015079d44d70707cc493ef1a88b53ee58",
+  "sourceFilesModifiedRelativeToHead": [],
+  "sha256": {
+    "Server/Order_Service/src/main/java/com/OrderManagement/OrderManagement/OrderManagementApplication.java": "edfee3c1bd62d35548ddcef345180a6745ee8294a78fbd4789f397aa355b41fa",
+    "Server/Order_Service/src/main/java/com/OrderManagement/OrderManagement/controller/OrderController.java": "ae4468d1042a44b9882c081bb2459b270662b0921344df2d6a4a35b0bd021d05",
+    "Server/Order_Service/src/main/java/com/OrderManagement/OrderManagement/exception/GlobalExceptionHandler.java": "360b26dff8038931b751a55e6c242c80cac2da54bfdbf7d3a3c58c06b2a77699",
+    "Server/Order_Service/src/main/java/com/OrderManagement/OrderManagement/exception/OrderException.java": "2cbee269504dbdef4ce8007ded6889fab6552e8cdd782f84d1cf7f968ebb19ad",
+    "Server/Order_Service/src/main/java/com/OrderManagement/OrderManagement/model/OrderItem.java": "72ceaf0c127a9553c28d37c65d466e29197b72398e7e3ef266fbbdeaa7884f0f",
+    "Server/Order_Service/src/main/java/com/OrderManagement/OrderManagement/model/OrderModel.java": "3d3aac038ec33d98318022794b5c1e71f842a2b98b26030589a5cc60f7b611b5",
+    "Server/Order_Service/src/main/java/com/OrderManagement/OrderManagement/model/OrderStatus.java": "21c1f9a389f6e2ead419be0da92e713b406a5133aa8f8381bb11f92a178d93e0",
+    "Server/Order_Service/src/main/java/com/OrderManagement/OrderManagement/repository/OrderRepository.java": "60fe11059e46f7aa21bffa67c895e4ba3a2d09aa484dedf0067dd17664901dc6",
+    "Server/Order_Service/src/main/java/com/OrderManagement/OrderManagement/service/OrderService.java": "14bf61f0376488a51279be43c09ce8fdaa5ed9597393af8657f1193ce5107661",
+    "Server/notification/src/main/java/com/example/Notification/CorsGlobalConfig.java": "d2cd56ff192ef46e6bf9c23e89fd37a79ba7e2d18cb50880a771539b4e8fcfa3",
+    "Server/notification/src/main/java/com/example/Notification/NotificationApplication.java": "99c901bdec7c12fa30df6592d816371e72d15b4182df8b9f72ff79ad534ce62a",
+    "Server/notification/src/main/java/com/example/Notification/api/OrderController.java": "ba7717e304ee2f9baa72fcaa9025249b2bb5e3d3021c068fdf100502c251886a",
+    "Server/notification/src/main/java/com/example/Notification/controller/NotificationController.java": "46c04025420ab014dc0907d532533c5bf0888cc764893e594cab9d81c439d2b5",
+    "Server/notification/src/main/java/com/example/Notification/dto/DriverConfirmationRequest.java": "12418388572d10c65c1c230a9ed34191b2ad64d2ffd753b9ef9fc24583d6c4e8",
+    "Server/notification/src/main/java/com/example/Notification/dto/PaymentConfirmationRequest.java": "c8cbb38bbd1575c514f0dde584fa861847851d6ca4e5f18e23e1069f28a1e769",
+    "Server/notification/src/main/java/com/example/Notification/dto/RestaurantConfirmationRequest.java": "701dfc8932a3db57b36df5b366a2f6f5c3f12fc1cb6e6f8d368dc0b9d2dde793",
+    "Server/notification/src/main/java/com/example/Notification/service/EmailService.java": "78eba6cff66217881534dd82d2aa2c372c9ca0956c10f10806fafc97ec353f24"
+  },
+  "note": "Source files compiled directly by the PoC; dependencies and isolated environment are described in README.md."
+}

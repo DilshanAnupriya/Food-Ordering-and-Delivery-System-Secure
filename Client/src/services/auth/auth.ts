@@ -29,27 +29,18 @@ const API_URL = 'http://localhost:8082/';
 class AuthService {
     async login(credentials: LoginCredentials): Promise<AuthResponse> {
         try {
-            // Make API request using Axios - trying multiple possible endpoints
-            let response;
-            try {
-                // First attempt: API_URL/auth/login (common pattern)
-                response = await axios.post(`${API_URL}login`, credentials, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': '*/*',
-                        'Access-Control-Expose-Headers': 'Authorization'
-                    }
-                });
-            } catch (err) {
-                // Second attempt: directly at /login (as in original code)
-                response = await axios.post(`http://localhost:8082/login`, credentials, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': '*/*',
-                        'Access-Control-Expose-Headers': 'Authorization'
-                    }
-                });
-            }
+            // Make a SINGLE API request to the login endpoint.
+            // (Previously this tried the URL, then retried the *same* URL in a
+            // catch block, sending two requests per click. That double-counted
+            // failed logins against the lockout counter, so the "attempts
+            // remaining" dropped by two each time. One request fixes it.)
+            const response = await axios.post(`${API_URL}login`, credentials, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*',
+                    'Access-Control-Expose-Headers': 'Authorization'
+                }
+            });
 
             // Check if token is in the response header (common JWT pattern)
             let token = response.headers['authorization'];
@@ -140,8 +131,16 @@ class AuthService {
             if (axios.isAxiosError(error)) {
                 if (error.response) {
                     // Server responded with a status other than 2xx
-                    const errorMessage = error.response.data?.message || 'Login failed';
-                    throw new Error(errorMessage);
+                    const data: any = error.response.data || {};
+                    const errorMessage = data.message || 'Login failed';
+                    // Enrich the error with the lockout details returned by the
+                    // Auth service so the Login page can show attempts-remaining
+                    // and lock-time toasts (V-AuthWeakness Test 4 fix).
+                    const enriched: any = new Error(errorMessage);
+                    enriched.status = error.response.status;
+                    enriched.attemptsRemaining = data.attemptsRemaining;
+                    enriched.minutesRemaining = data.minutesRemaining;
+                    throw enriched;
                 } else if (error.request) {
                     // Request was made but no response received
                     throw new Error('No response from server. Please check your connection.');

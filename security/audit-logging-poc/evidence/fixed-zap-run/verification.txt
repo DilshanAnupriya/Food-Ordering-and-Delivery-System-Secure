@@ -1,0 +1,22 @@
+FIXED AUDIT TRAIL — ZAP Desktop 2.17.0
+History 53: 01-create -> HTTP 201; request ID c5745be1-0ebb-47b2-9b1a-f8f4214b51ce
+History 57: 02-read -> HTTP 200; request ID 4f73d010-4b34-47c7-ac08-1406263bc6f4
+History 58: 03-update -> HTTP 200; request ID 4f366a85-03d9-425b-a556-24f228e6559f
+History 60: 04-confirm -> HTTP 200; request ID bb697c47-eb3a-4d01-a685-2e1d1bd48eee
+History 61: 05-rejected-transition -> HTTP 400; request ID bcd37c72-fb43-42a8-b674-6e677fb2e094
+History 63: 06-denied -> HTTP 403; request ID 47489ee8-5be5-42cd-b2e6-70c090f8aba8
+History 64: 07-null-status -> HTTP 400; request ID e4337364-6297-48f3-97b5-12ef52cdd3a6
+History 65: 08-invalid-status -> HTTP 400; request ID 425a0fff-7af6-46b4-82e0-a2b58602a7eb
+History 66: 09-malformed-json -> HTTP 400; request ID 52686e44-3aba-48f9-8b24-a9c08c1f6c84
+History 67: 10-cancel -> HTTP 200; request ID beb6c615-e448-4a8f-b6cd-8ee35905d5b8
+History 68: 11-delete -> HTTP 204; request ID a1a8700e-d109-4b58-9e4c-34e4e02d2954
+History 69: 12-after-delete -> HTTP 404; request ID 5c449ada-db95-41ce-b1d5-4a9b4dc3ee40
+History 70: 13-unverified-identity -> HTTP 201; request ID 091bba4c-205e-4215-9ff1-82fe4bc39819
+
+PASS: 13 ZAP-proxied requests with expected responses.
+PASS: 11 audit records retained for deleted order (5 SUCCESS, 1 DENIED, 5 REJECTED).
+PASS: verified JWT actor attribution; spoofed headers/body without JWT labelled UNVERIFIED.
+PASS: 12 total audit records survive application restart; deleted order remains absent.
+PASS: audit records exclude tokens, addresses, phone numbers and signing secrets.
+Audit tests: 3 passed; includes transaction rollback/storage failure and invalid JWT controls.
+The simulated audit-storage CHECK constraint error in the test log is intentional.

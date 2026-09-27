@@ -1,0 +1,54 @@
+{
+  "finding" : "Pagination cap regression",
+  "recordedAtUtc" : "2026-09-26T11:48:13.673682Z",
+  "springBootVersion" : "3.4.3",
+  "javaVersion" : "21.0.9",
+  "httpHost" : "127.0.0.1",
+  "httpPort" : 49706,
+  "seededOrders" : 250,
+  "baseline" : {
+    "url" : "http://127.0.0.1:49706/api/v1/orders?page=0&size=10",
+    "requestedSize" : 10,
+    "status" : 200,
+    "headers" : {
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:48:13 GMT" ],
+      "transfer-encoding" : [ "chunked" ]
+    },
+    "returnedOrders" : 10,
+    "totalItems" : 250,
+    "responseBytes" : 4789,
+    "durationMs" : 37
+  },
+  "oversized" : {
+    "url" : "http://127.0.0.1:49706/api/v1/orders?page=0&size=200",
+    "requestedSize" : 200,
+    "status" : 400,
+    "headers" : {
+      "connection" : [ "close" ],
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:48:13 GMT" ],
+      "transfer-encoding" : [ "chunked" ]
+    },
+    "returnedOrders" : 0,
+    "totalItems" : 0,
+    "responseBytes" : 104,
+    "durationMs" : 14
+  },
+  "scope" : "Direct service HTTP with secured controller/service/repository; H2 replaces MySQL; no gateway.",
+  "limitation" : "Confirms rejection of size=200; does not measure throughput or denial-of-service resilience. Timing is descriptive.",
+  "maximum" : {
+    "url" : "http://127.0.0.1:49706/api/v1/orders?page=0&size=100",
+    "requestedSize" : 100,
+    "status" : 200,
+    "headers" : {
+      "content-type" : [ "application/json" ],
+      "date" : [ "Sat, 26 Sep 2026 11:48:13 GMT" ],
+      "transfer-encoding" : [ "chunked" ]
+    },
+    "returnedOrders" : 100,
+    "totalItems" : 250,
+    "responseBytes" : 47342,
+    "durationMs" : 22
+  }
+}

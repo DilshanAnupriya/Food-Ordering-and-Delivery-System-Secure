@@ -4,6 +4,7 @@ import com.example.pos1.pos1.jwt.JwtConfig;
 import com.example.pos1.pos1.jwt.JwtTokeVerifier;
 import com.example.pos1.pos1.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 import com.example.pos1.pos1.repo.ApplicationUserRepo;
+import com.example.pos1.pos1.service.LoginAttemptService;
 import com.example.pos1.pos1.service.impl.ApplicationUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -33,14 +34,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfiguration {
     private final SecretKey secretKey;
     private final JwtConfig jwtConfig;
     private final ApplicationUserRepo userRepository;
+    private final LoginAttemptService loginAttemptService;
 
     @Autowired
-    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserServiceImpl userService, SecretKey secretKey, JwtConfig jwtConfig,ApplicationUserRepo userRepository) {
+    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserServiceImpl userService, SecretKey secretKey, JwtConfig jwtConfig, ApplicationUserRepo userRepository, LoginAttemptService loginAttemptService) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.secretKey = secretKey;
         this.jwtConfig = jwtConfig;
         this.userRepository = userRepository;
+        this.loginAttemptService = loginAttemptService;
     }
 
     @Bean
@@ -49,7 +52,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfiguration {
     ) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager, jwtConfig, secretKey, userRepository))
+                .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager, jwtConfig, secretKey, userRepository, loginAttemptService))
                 .addFilterAfter(new JwtTokeVerifier(jwtConfig, secretKey), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/v1/users/visitor/**").permitAll()

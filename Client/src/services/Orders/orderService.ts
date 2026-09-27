@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Order, OrderStatus, PaginatedOrdersResponse } from '../../types/Order/order';
+import { attachAuthInterceptor } from '../auth/httpAuth';
 
 const API_BASE_URL = 'http://localhost:8082/api/v1/';
 
@@ -10,6 +11,10 @@ const api = axios.create({
   },
   withCredentials: true,
 });
+
+// This is a custom axios instance, so the global default-instance interceptor
+// does not apply - attach the JWT interceptor explicitly (V-AuthWeakness Test 1).
+attachAuthInterceptor(api);
 
 export const orderService = {
   // Get paginated orders
