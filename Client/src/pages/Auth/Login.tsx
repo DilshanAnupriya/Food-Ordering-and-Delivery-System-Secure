@@ -104,7 +104,7 @@ const Login = () => {
                 muted
                 loop
             >
-                <source src="public/assets/Sprinkling Grated Cheese Pasta 4K.mp4" type="video/mp4" />
+                <source src="/assets/Sprinkling Grated Cheese Pasta 4K.mp4" type="video/mp4" />
             </video>
             <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80 z-10 items-center justify-center">
             <div className="bg-white py-8 px-4  w-120 ml-160 xl:ml-120 mt-25 shadow-xl sm:rounded-xl sm:px-10 transform transition-all duration-500 hover:shadow-2xl">

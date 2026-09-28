@@ -207,7 +207,7 @@ const Banner = () => {
                 >
                   {/* Burger image with enhanced shadow effect */}
                   <motion.img
-                      src="public/assets/burger.png"
+                      src="/assets/burger.png"
                       alt="Delicious Burger"
                       className="w-64 mt-20 ml-10 h-auto"
                       style={{

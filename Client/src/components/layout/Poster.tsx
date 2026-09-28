@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import logo from "../../../public/assets/logo.jpeg"
+const logo = "/assets/logo.jpeg";
 const FoodDeliveryPoster = () => {
     const [isHovered, setIsHovered] = useState(false);
     const [isInView, setIsInView] = useState(false);
@@ -151,7 +151,7 @@ const FoodDeliveryPoster = () => {
                                     }}
                                     transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
                                 >
-                                      <div className="w-58 h-60 bg-[url('public/assets/logo.jpeg')] bg-cover bg-center  rounded-4xl flex items-center justify-center">
+                                      <div className="w-58 h-60 bg-[url('/assets/logo.jpeg')] bg-cover bg-center  rounded-4xl flex items-center justify-center">
                                 </div>
                                 </motion.span>
                             </div>

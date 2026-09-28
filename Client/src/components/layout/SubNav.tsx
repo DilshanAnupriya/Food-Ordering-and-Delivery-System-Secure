@@ -1,6 +1,6 @@
-import Star from '../../../public/assets/Star Icon.png'
-import Location from '../../../public/assets/Location.png'
-import Cart from '../../../public/assets/Full Shopping Basket.png'
+const Star = '/assets/Star Icon.png';
+const Location = '/assets/Location.png';
+const Cart = '/assets/Full Shopping Basket.png';
 import {Link} from "react-router-dom";
 
 
