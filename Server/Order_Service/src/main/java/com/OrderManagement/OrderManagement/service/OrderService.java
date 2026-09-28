@@ -13,17 +13,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    private final RestTemplate restTemplate = new RestTemplate();
 
     public List<OrderModel> getAllOrders() {
         return orderRepository.findAll();
@@ -71,28 +75,77 @@ public class OrderService {
     }
 
     private void calculateOrderTotals(OrderModel order) {
-        // Calculate subtotal from items
-        BigDecimal subtotal = order.getOrderItems().stream()
-                .map(OrderItem::getTotalPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal subtotal = BigDecimal.ZERO;
+
+        for (OrderItem item : order.getOrderItems()) {
+            if (item.getQuantity() == null || item.getQuantity() <= 0) {
+                throw new OrderException("Quantity must be greater than zero for item: " + item.getItemName(), HttpStatus.BAD_REQUEST);
+            }
+
+            // 1. Fetch authoritative catalog price from Restaurant Service
+            BigDecimal authoritativePrice = fetchAuthoritativePrice(item.getMenuItemId());
+
+            // 2. Detect and reject client-side price parameter tampering
+            if (item.getUnitPrice() != null && item.getUnitPrice().setScale(2, RoundingMode.HALF_UP).compareTo(authoritativePrice) != 0) {
+                throw new OrderException(
+                        "Price parameter tampering detected for item '" + item.getItemName()
+                                + "'. Authoritative price: " + authoritativePrice
+                                + ", but received client price: " + item.getUnitPrice(),
+                        HttpStatus.BAD_REQUEST
+                );
+            }
+
+            // 3. Detect and reject client-side total price tampering
+            BigDecimal expectedItemTotal = authoritativePrice.multiply(BigDecimal.valueOf(item.getQuantity())).setScale(2, RoundingMode.HALF_UP);
+            if (item.getTotalPrice() != null && item.getTotalPrice().setScale(2, RoundingMode.HALF_UP).compareTo(expectedItemTotal) != 0) {
+                throw new OrderException(
+                        "Total price tampering detected for item '" + item.getItemName()
+                                + "'. Expected item total: " + expectedItemTotal
+                                + ", but received client total: " + item.getTotalPrice(),
+                        HttpStatus.BAD_REQUEST
+                );
+            }
+
+            // 4. Force server-side calculations
+            item.setUnitPrice(authoritativePrice);
+            item.setTotalPrice(expectedItemTotal);
+            subtotal = subtotal.add(expectedItemTotal);
+        }
 
         order.setSubtotal(subtotal);
 
-        // Ensure other values are present
-        if (order.getDeliveryFee() == null) {
+        // Ensure delivery fee and tax are valid
+        if (order.getDeliveryFee() == null || order.getDeliveryFee().compareTo(BigDecimal.ZERO) < 0) {
             order.setDeliveryFee(BigDecimal.ZERO);
         }
 
-        if (order.getTax() == null) {
+        if (order.getTax() == null || order.getTax().compareTo(BigDecimal.ZERO) < 0) {
             order.setTax(BigDecimal.ZERO);
         }
 
-        // Calculate total
+        // Calculate final verified total
         BigDecimal total = subtotal
                 .add(order.getDeliveryFee())
                 .add(order.getTax());
 
         order.setTotalAmount(total);
+    }
+
+    private BigDecimal fetchAuthoritativePrice(String menuItemId) {
+        try {
+            String url = "http://localhost:8082/api/v1/foods/" + menuItemId;
+            Map<?, ?> response = restTemplate.getForObject(url, Map.class);
+            if (response != null && response.containsKey("data")) {
+                Map<?, ?> data = (Map<?, ?>) response.get("data");
+                if (data != null && data.containsKey("price")) {
+                    Number priceNum = (Number) data.get("price");
+                    return BigDecimal.valueOf(priceNum.doubleValue()).setScale(2, RoundingMode.HALF_UP);
+                }
+            }
+        } catch (Exception e) {
+            throw new OrderException("Unable to verify price for item ID " + menuItemId + " with catalog service: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        throw new OrderException("Menu item not found in catalog: " + menuItemId, HttpStatus.BAD_REQUEST);
     }
 
     private void validateOrder(OrderModel order) {

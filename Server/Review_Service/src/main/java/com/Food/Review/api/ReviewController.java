@@ -4,6 +4,7 @@ import com.Food.Review.dto.request.ReviewRequestDto;
 import com.Food.Review.service.ReviewService;
 import com.Food.Review.util.StandardResponseDto;
 import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class ReviewController {
 
     @PostMapping
     public ResponseEntity<StandardResponseDto> createReview(
-            @RequestBody ReviewRequestDto dto
+            @Valid @RequestBody ReviewRequestDto dto
     ) {
         reviewService.createReview(dto);
         return new ResponseEntity<>(
@@ -64,7 +65,7 @@ public class ReviewController {
     @PutMapping("/{id}")
     public ResponseEntity<StandardResponseDto> UpdateReview(
             @PathVariable("id") String reviewId,
-            @RequestBody ReviewRequestDto dto
+            @Valid @RequestBody ReviewRequestDto dto
     ) {
         reviewService.updateReview(dto, reviewId);
         return new ResponseEntity<>(

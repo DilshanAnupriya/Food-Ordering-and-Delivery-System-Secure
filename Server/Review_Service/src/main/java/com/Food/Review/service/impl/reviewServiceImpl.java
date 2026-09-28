@@ -10,6 +10,7 @@ import com.Food.Review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -30,8 +31,11 @@ public class reviewServiceImpl implements ReviewService {
     public void updateReview(ReviewRequestDto dto,String id) {
         Reviews reviews = reviewRepo.findById(id).orElseThrow(()-> new EntryNotFoundException("not found"));
 
-        reviews.setCustomer_name(dto.getCustomer_name());
-        reviews.setReview_content(dto.getReview_content());
+        String sanitizedName = dto.getCustomer_name() != null ? HtmlUtils.htmlEscape(dto.getCustomer_name().trim()) : null;
+        String sanitizedContent = dto.getReview_content() != null ? HtmlUtils.htmlEscape(dto.getReview_content().trim()) : null;
+
+        reviews.setCustomer_name(sanitizedName);
+        reviews.setReview_content(sanitizedContent);
         reviews.setRating(dto.getRating());
         reviews.setUpdated_at(LocalDateTime.now());
 
@@ -65,12 +69,16 @@ public class reviewServiceImpl implements ReviewService {
 
     public Reviews toReview(ReviewRequestDto dto) {
         if(dto == null) throw new NullPointerException("dto cannot be null");
+
+        String sanitizedName = dto.getCustomer_name() != null ? HtmlUtils.htmlEscape(dto.getCustomer_name().trim()) : null;
+        String sanitizedContent = dto.getReview_content() != null ? HtmlUtils.htmlEscape(dto.getReview_content().trim()) : null;
+
         return Reviews.builder()
                 .review_id(UUID.randomUUID().toString())
                 .customer_id(dto.getCustomer_id())
-                .customer_name(dto.getCustomer_name())
+                .customer_name(sanitizedName)
                 .restaurant_id(dto.getRestaurant_id())
-                .review_content(dto.getReview_content())
+                .review_content(sanitizedContent)
                 .rating(dto.getRating())
                 .created_at(LocalDateTime.now())
                 .updated_at(LocalDateTime.now())

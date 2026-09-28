@@ -12,6 +12,7 @@ import WrapperPagination from '../../components/Restaurants/Pagination.tsx';
 import { fetchFoodCategories } from '../../services/Restaurants/Fooditems.ts';
 import NavV2 from '../../components/layout/NavV2.tsx';
 import EnhancedFoodItemsListWrapper from "../../components/Restaurants/FoodItemsList.tsx";
+import { RestaurantReviews } from "../../components/Restaurants/RestaurantReviews.tsx";
 
 // Define TypeScript interfaces for the data
 interface FoodItem {
@@ -252,6 +253,7 @@ const Restaurant = () => {
                 onPageChange={handlePageChange}
             />
 </div>
+            <RestaurantReviews restaurantId={id || ''} />
             <Footer/>
         </div>
     );
