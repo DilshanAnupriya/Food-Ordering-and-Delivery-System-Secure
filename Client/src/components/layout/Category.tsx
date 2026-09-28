@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
 
 // Animation variants
 const containerVariants = {
@@ -156,11 +157,13 @@ const FoodCard = ({ categoryName, index }) => {
                     <motion.p className="text-white font-bold text-xl mb-2">
                         {categoryName}
                     </motion.p>
-                    <motion.button
-                        className="bg-white text-orange-500 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-orange-500 hover:text-white transition-colors duration-300"
-                    >
-                        Explore Now
-                    </motion.button>
+                    <Link to="/restaurants">
+                        <motion.button
+                            className="bg-white text-orange-500 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-orange-500 hover:text-white transition-colors duration-300"
+                        >
+                            Explore Now
+                        </motion.button>
+                    </Link>
                 </motion.div>
             </motion.div>
         </motion.div>

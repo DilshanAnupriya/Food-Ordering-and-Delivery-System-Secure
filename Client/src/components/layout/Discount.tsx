@@ -84,9 +84,9 @@ const Nav = () => {
                 <p className="text-gray-500 mt-2">Limited time offers you can't resist</p>
             </div>
             <motion.button
-                whileHover={{ scale: 1.05, backgroundColor: "#ea580c" }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-5 py-2 bg-orange-500 text-white rounded-full font-medium text-sm transition-colors duration-300"
+                className="px-5 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-medium text-sm transition-colors duration-300"
             >
                 View All
             </motion.button>
@@ -185,13 +185,15 @@ const DiscountCard: React.FC<DiscountProps> = ({
                 >
                     <p className="text-white font-bold text-lg mb-2">{discount} OFF</p>
                     <p className="text-white mb-4">Limited time offer!</p>
-                    <motion.button
-                        whileHover={{ scale: 1.05, backgroundColor: "#fff", color: "#f97316" }}
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-white text-orange-500 font-bold py-2 px-6 rounded-full shadow-lg transition-all duration-300"
-                    >
-                        Order Now
-                    </motion.button>
+                    <Link to="/restaurants">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="bg-white hover:bg-orange-50 text-orange-500 hover:text-orange-600 font-bold py-2 px-6 rounded-full shadow-lg transition-all duration-300"
+                        >
+                            Order Now
+                        </motion.button>
+                    </Link>
                 </motion.div>
             </motion.div>
         </motion.div>
@@ -323,7 +325,7 @@ const Discount = () => {
                                         </p>
                                         <p className="text-orange-50 mb-6 text-sm">Limited time offer. Terms & conditions apply.</p>
 
-                                        <Link to="/cart/:id">
+                                        <Link to="/restaurants">
                                         <motion.button
                                             whileHover={{
                                                 scale: 1.05,

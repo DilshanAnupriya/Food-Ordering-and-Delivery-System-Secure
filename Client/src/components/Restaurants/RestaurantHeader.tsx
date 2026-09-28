@@ -181,8 +181,8 @@ const WrapperRestaurantHeader: React.FC<Props> = ({ restaurant }) => {
                     >
                         <motion.a
                             href={`tel:${restaurant.restaurantPhone}`}
-                            className="bg-white/10 hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg flex items-center text-sm"
-                            whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
+                            className="bg-white/10 hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg flex items-center text-sm transition-colors"
+                            whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -192,8 +192,8 @@ const WrapperRestaurantHeader: React.FC<Props> = ({ restaurant }) => {
                         </motion.a>
                         <motion.a
                             href={`mailto:${restaurant.restaurantEmail}`}
-                            className="bg-white/10 hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg flex items-center text-sm"
-                            whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
+                            className="bg-white/10 hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg flex items-center text-sm transition-colors"
+                            whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -203,8 +203,8 @@ const WrapperRestaurantHeader: React.FC<Props> = ({ restaurant }) => {
                         </motion.a>
                         <Link to="/cart/:id">
                         <motion.button
-                            className="bg-yellow-500 hover:bg-yellow-600 text-yellow-900 px-6 py-2 rounded-lg flex items-center text-sm font-medium"
-                            whileHover={{ scale: 1.05, backgroundColor: "#f59e0b" }}
+                            className="bg-yellow-500 hover:bg-yellow-600 text-yellow-900 px-6 py-2 rounded-lg flex items-center text-sm font-medium transition-colors"
+                            whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}

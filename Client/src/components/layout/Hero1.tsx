@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import SectionWrapper from "../../hoc/SectionWrapper.tsx";
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 interface TrendingRestaurant {
     restaurantName: string;
@@ -68,41 +68,43 @@ const RestaurantCard = ({ restaurant }: { restaurant: TrendingRestaurant }) => {
     };
 
     return (
-        <motion.div
-            className="flex flex-col w-full   rounded-2xl overflow-hidden shadow-md bg-white"
-            variants={cardVariants}
-            initial="hidden"
-            animate="visible"
-            whileHover="hover"
-        >
-            <div className="relative h-48 overflow-hidden">
-                <img
-                    src={restaurant.url || "/api/placeholder/400/300"}
-                    alt={restaurant.restaurantName}
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
-                />
+        <Link to="/restaurants" className="block">
+            <motion.div
+                className="flex flex-col w-full rounded-2xl overflow-hidden shadow-md bg-white cursor-pointer"
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                whileHover="hover"
+            >
+                <div className="relative h-48 overflow-hidden">
+                    <img
+                        src={restaurant.url || "/api/placeholder/400/300"}
+                        alt={restaurant.restaurantName}
+                        className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
+                    />
 
-                {/* Trending badge */}
-                <motion.div
-                    className="absolute top-3 right-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full"
-                    variants={badgeVariants}
-                >
-                    Trending
-                </motion.div>
-            </div>
-
-            <div className="p-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white">
-                <h3 className="font-semibold text-lg text-center">
-                    {restaurant.restaurantName}
-                </h3>
-                <div className="flex items-center justify-center mt-1 text-xs">
-                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                    </svg>
-                    <span>Popular Choice</span>
+                    {/* Trending badge */}
+                    <motion.div
+                        className="absolute top-3 right-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full"
+                        variants={badgeVariants}
+                    >
+                        Trending
+                    </motion.div>
                 </div>
-            </div>
-        </motion.div>
+
+                <div className="p-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white">
+                    <h3 className="font-semibold text-lg text-center">
+                        {restaurant.restaurantName}
+                    </h3>
+                    <div className="flex items-center justify-center mt-1 text-xs">
+                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                        </svg>
+                        <span>Popular Choice</span>
+                    </div>
+                </div>
+            </motion.div>
+        </Link>
     );
 };
 

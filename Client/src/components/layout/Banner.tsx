@@ -77,7 +77,7 @@ const Banner = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
                 >
-                    <Link to="/cart/:id">
+                    <Link to="/restaurants">
                   <motion.button
                       className="px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg font-medium shadow-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center gap-2"
                       whileHover={{

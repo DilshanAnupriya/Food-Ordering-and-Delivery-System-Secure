@@ -678,7 +678,7 @@ const AdminUser: React.FC = () => {
                                                     <motion.button
                                                         onClick={() => handleUpdateClick(user)}
                                                         className="p-2 text-blue-600 hover:bg-blue-100 rounded-full transition-colors"
-                                                        whileHover={{ scale: 1.15, backgroundColor: "#dbeafe" }}
+                                                        whileHover={{ scale: 1.15 }}
                                                         whileTap={{ scale: 0.95 }}
                                                         title="Edit User"
                                                     >
@@ -687,7 +687,7 @@ const AdminUser: React.FC = () => {
                                                     <motion.button
                                                         onClick={() => handleRoleClick(user)}
                                                         className="p-2 text-purple-600 hover:bg-purple-100 rounded-full transition-colors"
-                                                        whileHover={{ scale: 1.15, backgroundColor: "#f3e8ff" }}
+                                                        whileHover={{ scale: 1.15 }}
                                                         whileTap={{ scale: 0.95 }}
                                                         title="Change Role"
                                                     >
@@ -696,7 +696,7 @@ const AdminUser: React.FC = () => {
                                                     <motion.button
                                                         onClick={() => handleDeleteClick(user)}
                                                         className="p-2 text-red-600 hover:bg-red-100 rounded-full transition-colors"
-                                                        whileHover={{ scale: 1.15, backgroundColor: "#fee2e2" }}
+                                                        whileHover={{ scale: 1.15 }}
                                                         whileTap={{ scale: 0.95 }}
                                                         title="Delete User"
                                                     >

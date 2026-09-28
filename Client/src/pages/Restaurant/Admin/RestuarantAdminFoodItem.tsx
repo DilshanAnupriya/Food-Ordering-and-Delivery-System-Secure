@@ -603,9 +603,9 @@ const AdminFoodItemDashboard = () => {
                                                 <motion.div
                                                     key={restaurant.id}
                                                     onClick={() => toggleRestaurantExpansion(restaurant.id)}
-                                                    whileHover={{ backgroundColor: 'rgba(249, 115, 22, 0.05)' }}
+                                                    whileHover={{ x: 2 }}
                                                     transition={{ duration: 0.2 }}
-                                                    className={`px-4 py-3 border-b border-gray-100 cursor-pointer ${
+                                                    className={`px-4 py-3 border-b border-gray-100 cursor-pointer hover:bg-orange-50/50 transition-colors ${
                                                         expandedRestaurant === restaurant.id ? 'bg-orange-50' : ''
                                                     }`}
                                                 >
