@@ -4,10 +4,10 @@
 
 | No. | Name | Index Number |
 |-----|------|--------------|
-| 1 | [Member 1 Name] | [Index Number] |
-| 2 | [Member 2 Name] | [Index Number] |
-| 3 | [Member 3 Name] | [Index Number] |
-| 4 | [Member 4 Name] | [Index Number] |
+| 1 | Hewaduwa H.G.V | IT22186706 |
+| 2 | Athukorala H.H.B | IT22066770 |
+| 3 | Jayasinghe J.A.N.T | IT22189530 |
+| 4 | Cooray B.D.A | IT22122100 |
 
 ---
 
@@ -17,7 +17,7 @@
 **Food Ordering and Delivery System**
 
 ### Module
-[Module Name / Code]
+SE4030 / Group ID:31
 
 ### Academic Year
 2026
@@ -33,21 +33,17 @@ This project was originally developed as a Food Ordering and Delivery System usi
 
 ### Original GitHub Repository
 
-[ORIGINAL_PROJECT_GITHUB_LINK]
+https://github.com/DilshanAnupriya/Food-Ordering-Delivery-System.git
 
 ### Original Project Reference
 
 If this project is based on a third-party project, the original project/reference is provided below:
 
-- **Project:** [Original Project Name]
-- **Author/Organization:** [Author or Organization]
-- **GitHub:** [Original Project Link]
+- **Project:** [Food Ordering and Delivery System
+- **Author/Organization:** Dilshan Anupriya,Chathumi Gunathunga,Vidura Hewaduwa,Navoda H.G.J
+- **GitHub:** https://github.com/DilshanAnupriya/Food-Ordering-Delivery-System.git
 
-If it is not a third-party project, write:
 
-> This project was originally developed by our team and is not based on a third-party project.
-
----
 
 ## 4. Modified Secure Project
 
@@ -55,7 +51,7 @@ This repository contains the modified version of the Food Ordering and Delivery 
 
 ### Modified GitHub Repository
 
-[MODIFIED_PROJECT_GITHUB_LINK]
+https://github.com/DilshanAnupriya/Food-Ordering-and-Delivery-System-Secure.git
 
 The GitHub commit history contains detailed comments describing the security fixes and implementation changes.
 
@@ -65,69 +61,20 @@ The GitHub commit history contains detailed comments describing the security fix
 
 The following security vulnerabilities were identified and addressed in the project.
 
-| No. | Vulnerability | Description | Fix Implemented |
-|-----|---------------|-------------|-----------------|
-| V1 | [Vulnerability Name] | [Short description] | [Fix] |
-| V2 | [Vulnerability Name] | [Short description] | [Fix] |
-| V3 | [Vulnerability Name] | [Short description] | [Fix] |
-| V4 | Sensitive Information Exposure | Sensitive information/secrets were exposed or improperly handled. | Secrets were removed from source code and configuration was secured. |
-| V5 | [Vulnerability Name] | [Short description] | [Fix] |
-| V6 | [Vulnerability Name] | [Short description] | [Fix] |
-| V7 | [Vulnerability Name] | [Short description] | [Fix] |
-| V8 | [Vulnerability Name] | [Short description] | [Fix] |
+| No. | Vulnerability | 
+|-----|---------------|
+| V1 | Broken Access Control / IDOR 
+| V2 | Authentication weakness 
+| V3 | Security misconfiguration / headers 
+| V4 | Sensitive Information Exposure 
+| V5 | Business Logic & Parameter/Price Tampering
+| V6 | Stored XSS & Lack of Input Sanitization 
+| V7 | Unrestricted Resource Consumption  
+| V8 | Missing Rate Limiting and Unbounded Pagination. 
 
-### Detailed Security Fixes
 
-#### V1 – [Vulnerability Name]
 
-**Problem:**
-[Explain what the vulnerability was.]
 
-**Impact:**
-[Explain what an attacker could potentially do.]
-
-**Fix:**
-[Explain how the vulnerability was fixed.]
-
-**Evidence:**
-- Commit: `[commit hash]`
-- File(s): `[file names]`
-
----
-
-#### V2 – [Vulnerability Name]
-
-**Problem:**
-[Explain the vulnerability.]
-
-**Impact:**
-[Explain the possible impact.]
-
-**Fix:**
-[Explain the implemented fix.]
-
-**Evidence:**
-- Commit: `[commit hash]`
-- File(s): `[file names]`
-
----
-
-#### V3 – [Vulnerability Name]
-
-**Problem:**
-[Explain the vulnerability.]
-
-**Impact:**
-[Explain the possible impact.]
-
-**Fix:**
-[Explain the implemented fix.]
-
-**Evidence:**
-- Commit: `[commit hash]`
-- File(s): `[file names]`
-
----
 
 ## 6. Authentication – Google Sign-In
 
